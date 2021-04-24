@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -7,6 +7,7 @@ using Zenject;
 public class Dump
 {
     internal event Action DumpGameOver;
+    internal event Action OnGarbageAmountUpdate;
 
     #region Variables
     private float currentStorageGarbage = 0;
@@ -27,11 +28,12 @@ public class Dump
     {
         if (currentStorageGarbage > settings.maxStorageGarbageAmount)
         {
-            DumpGameOver();
+            DumpGameOver?.Invoke();
         }
         else
         {
             currentStorageGarbage += settings.deliveredGarbageByOneTruck;
+            OnGarbageAmountUpdate?.Invoke();
         }
 
         money.AddMoney(settings.deliveredMoneyByOneTruck);
@@ -42,11 +44,17 @@ public class Dump
         if (currentStorageGarbage >= amount)
         {
             currentStorageGarbage -= amount;
+            OnGarbageAmountUpdate?.Invoke();
         }
         else
         {
-            Debug.Log("Недостаточной мусора для отправки");
+            Debug.Log("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕР№ РјСѓСЃРѕСЂР° РґР»СЏ РѕС‚РїСЂР°РІРєРё");
         }
+    }
+
+    internal float GetGarbageAmountRate()
+    {
+        return currentStorageGarbage / settings.maxStorageGarbageAmount;
     }
     #endregion
 
