@@ -6,5 +6,6 @@ public class GameInstaller : MonoInstaller
     {
         //Container.Bind<SomeService>().AsSingle();
         //Container.BindInterfacesAndSelfTo<SomeService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<Ecology>().AsSingle();
     }
 }
