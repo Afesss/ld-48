@@ -18,6 +18,9 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     [Header("Настройки экологии")]
     public Ecology.Settings Ecology;
 
+    [Header("Настройки заводов")]
+    public Factory.FactorySet[] Factory;
+
     [Serializable]
     public struct UISettings
     {
@@ -38,5 +41,6 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 //        Container.BindInstance(UI.Task);
 //        Container.BindInstance(UI.TaskList);
         Container.BindInstance(Ecology);
+        Container.BindInstance(Factory);
     }
 }

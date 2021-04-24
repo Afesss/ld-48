@@ -25,6 +25,7 @@ public class Dissatisfied
     internal void AddDissatisfied(float amount)
     {
         currentDissatisfied += amount;
+        CheckGameOver();
     }
     internal void SubtractDissatisfied(float amount)
     {
