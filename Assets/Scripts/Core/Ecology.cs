@@ -9,13 +9,13 @@ public class Ecology
 
     private Settings settings;
 
-    private int[] values;
+    private float[] values;
 
     public Ecology(Settings settings)
     {
         this.settings = settings;
         var count = Enum.GetNames(typeof(Type)).Length;
-        values = new int[count];
+        values = new float[count];
     }
 
     /// <summary>
@@ -25,10 +25,10 @@ public class Ecology
     /// <returns>Процент загрязнения</returns>
     public float GetCurrenPollutionRate()
     {
-        int maxValue = values.Max();
+        float maxValue = values.Max();
         int maxIndex = values.ToList().IndexOf(maxValue);
 
-        return maxValue / (float) GetMaxValue((Type)maxIndex);
+        return maxValue / GetMaxValue((Type)maxIndex);
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class Ecology
     /// </summary>
     /// <param name="type">Тип загрязнения</param>
     /// <param name="value">Количество добавляемого загрязнения</param>
-    public void AddParameter(Type type, int value)
+    public void AddParameter(Type type, float value)
     {
         values[(int)type] += value;
         if (values[(int)type] > GetMaxValue(type))
@@ -63,7 +63,7 @@ public class Ecology
     /// </summary>
     /// <param name="type">Тип загрязнения</param>
     /// <returns>Максимальное загрязнение</returns>
-    public int GetMaxValue(Type type)
+    public float GetMaxValue(Type type)
     {
         switch (type)
         {
