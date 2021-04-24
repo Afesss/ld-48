@@ -7,6 +7,8 @@ using System;
 public class Money
 {
     #region Variables
+    internal event Action OnMoneyAmountChange;
+
     internal int moneyAmount { get; private set; }
 
     private Settings settings;
@@ -23,6 +25,7 @@ public class Money
     internal void AddMoney(int amount)
     {
         moneyAmount += amount;
+        OnMoneyAmountChange?.Invoke();
     }
     internal bool SubtractMonet(int amount)
     {
@@ -34,6 +37,7 @@ public class Money
         }
 
         moneyAmount -= amount;
+        OnMoneyAmountChange?.Invoke();
         Debug.Log(moneyAmount);
         return true;
     }

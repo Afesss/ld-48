@@ -5,7 +5,7 @@ using Zenject;
 public class Factory: ITickable
 {
 
-    private Settings settings;
+    private FactorySet.Settings settings;
     private Money money;
     private Dissatisfied dissatisfied;
     private Ecology ecology;
@@ -163,7 +163,7 @@ public class Factory: ITickable
         }
     }
 
-    private Settings getSetingsByType(Type type, FactorySet[] set)
+    private FactorySet.Settings getSetingsByType(Type type, FactorySet[] set)
     {
         for(var i = 0; i < set.Length; i++)
             if (set[i].type == type)
@@ -171,8 +171,6 @@ public class Factory: ITickable
 
         throw new ArgumentOutOfRangeException();
     }
-
-    #region Settings
 
     public enum Type
     {
@@ -189,38 +187,4 @@ public class Factory: ITickable
         /// </summary>
         Water,
     }
-
-    [Serializable]
-    public struct FactorySet
-    {
-        public Factory.Type type;
-        public Factory.Settings settings;
-    }
-
-    [Serializable]
-    public struct Settings
-    {
-        [Tooltip("Загрязнение воздуха")]
-        public float AirPollutionPerSecond;
-
-        [Tooltip("Загрязнение леса")]
-        public float ForestPollutionPerSecond;
-
-        [Tooltip("Загрязнение воды")]
-        public float WaterPollutionPerSecond;
-
-        [Tooltip("Вместимость хранилища завода")]
-        public int StorageCapacity;
-
-        [Tooltip("Недовольства в секунду")]
-        public float DissatisfiedAmountPerSecond;
-
-        [Tooltip("Сжигания в секунду")]
-        public float BurnAmountPerTick;
-
-        [Tooltip("Настройки улучшений")]
-        public FactoryUpgradeSettings[] Upgrades;
-    }
-
-    #endregion
 }
