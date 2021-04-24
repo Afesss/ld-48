@@ -20,7 +20,7 @@ public class Dissatisfied : ITickable
     }
     #endregion
 
-    #region methods
+    #region Methods
     public void Tick()
     {
         currentDissatisfied += overallDissatisfied * Time.deltaTime;
