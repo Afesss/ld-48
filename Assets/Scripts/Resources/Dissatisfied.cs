@@ -20,7 +20,8 @@ public class Dissatisfied
     }
     #endregion
 
-    #region methods
+    #region Methods
+    
     internal void AddDissatisfied(float amount)
     {
         currentDissatisfied += amount;
