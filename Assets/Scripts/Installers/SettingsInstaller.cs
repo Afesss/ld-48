@@ -19,7 +19,7 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     public Ecology.Settings Ecology;
 
     [Header("Настройки заводов")]
-    public Factory.FactorySet[] Factory;
+    public FactorySet[] Factory;
 
     [Serializable]
     public struct UISettings

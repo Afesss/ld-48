@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -7,6 +7,8 @@ using System;
 public class Money
 {
     #region Variables
+    internal event Action OnMoneyAmountChange;
+
     internal int moneyAmount { get; private set; }
 
     private Settings settings;
@@ -23,17 +25,19 @@ public class Money
     internal void AddMoney(int amount)
     {
         moneyAmount += amount;
+        OnMoneyAmountChange?.Invoke();
     }
     internal bool SubtractMonet(int amount)
     {
         if(moneyAmount < amount)
         {
-            Debug.Log("Íåäîñòàòî÷íî äåíåã");
+            Debug.Log("ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ Ð´ÐµÐ½ÐµÐ³");
             return false;
 
         }
 
         moneyAmount -= amount;
+        OnMoneyAmountChange?.Invoke();
         Debug.Log(moneyAmount);
         return true;
     }
