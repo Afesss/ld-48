@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Zenject;
 
-public class Dissatisfied : ITickable
+public class Dissatisfied
 {
     internal event Action DissatisfiedGameOver;
 
@@ -21,19 +21,10 @@ public class Dissatisfied : ITickable
     #endregion
 
     #region methods
-    public void Tick()
-    {
-        currentDissatisfied += overallDissatisfied * Time.deltaTime;
-        CheckGameOver();
-    }
-
-    internal void AddDissatisfiedPerSecond(float amountPerSecond)
-    {
-        overallDissatisfied += amountPerSecond;
-    }
     internal void AddDissatisfied(float amount)
     {
         currentDissatisfied += amount;
+        CheckGameOver();
     }
     internal void SubtractDissatisfied(float amount)
     {
