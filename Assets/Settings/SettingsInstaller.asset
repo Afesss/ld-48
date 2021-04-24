@@ -12,3 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65942e415c910240963a5b8770c9570, type: 3}
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
+  Money:
+    startAmount: 0
+  Dissatisfied:
+    maxDissatified: 0
+  Ecology:
+    MaxAirValue: 0
+    MaxForestValue: 0
+    MaxWaterValue: 0
+  Factory:
+  - type: 0
+    settings:
+      AirPollutionAmount: 0
+      ForestPollutionAmount: 0
+      WaterPollutionAmount: 0
+      StorageAmount: 0
+      DissatisfiedPerTick: 0
+      Upgrades:
+      - {fileID: 11400000, guid: f6efb408c6fee46418f2a0c9ac0ba5db, type: 2}
+      - {fileID: 11400000, guid: 6ac7efbb357448348bf61fcbbecdf06b, type: 2}
+      - {fileID: 11400000, guid: ee11470e66d9c2e4b88a6d970bd19ee9, type: 2}
+  - type: 1
+    settings:
+      AirPollutionAmount: 0
+      ForestPollutionAmount: 0
+      WaterPollutionAmount: 0
+      StorageAmount: 0
+      DissatisfiedPerTick: 0
+      Upgrades:
+      - {fileID: 11400000, guid: b38e542fd93882c4fa1e10467eab5c7a, type: 2}
+      - {fileID: 11400000, guid: cafaf2dc29decfa48aea3f90fadcf874, type: 2}
+      - {fileID: 11400000, guid: 85f0835f72a620d4fa0456e11c8ffbba, type: 2}
+  - type: 1
+    settings:
+      AirPollutionAmount: 0
+      ForestPollutionAmount: 0
+      WaterPollutionAmount: 0
+      StorageAmount: 0
+      DissatisfiedPerTick: 0
+      Upgrades:
+      - {fileID: 11400000, guid: e79a84ad5432f234d85673baabb89a1c, type: 2}
+      - {fileID: 11400000, guid: 77a027c7088675b478667339cd93232d, type: 2}
+      - {fileID: 11400000, guid: 0b2c957c0a6c12a4c8c7e18f79627873, type: 2}

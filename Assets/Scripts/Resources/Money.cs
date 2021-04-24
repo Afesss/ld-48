@@ -24,17 +24,18 @@ public class Money
     {
         moneyAmount += amount;
     }
-    internal void SubtractMonet(int amount)
+    internal bool SubtractMonet(int amount)
     {
-        if(moneyAmount >= amount)
-        {
-            moneyAmount -= amount;
-        }
-        else
+        if(moneyAmount < amount)
         {
             Debug.Log("Недостаточно денег");
+            return false;
+
         }
+
+        moneyAmount -= amount;
         Debug.Log(moneyAmount);
+        return true;
     }
     #endregion
 
