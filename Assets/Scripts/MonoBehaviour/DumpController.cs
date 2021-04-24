@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,21 @@ public class DumpController : MonoBehaviour
         this.dump = dump;
     }
 
+    private void Awake()
+    {
+        storageView.SetValueRate(0);
+        if (dump != null)
+            dump.OnGarbageAmountUpdate += OnGarbageAmountUpdate;
+    }
 
+    private void OnGarbageAmountUpdate()
+    {
+        storageView.SetValueRate(dump.GetGarbageAmountRate());
+    }
 
+    private void OnDestroy()
+    {
+        if (dump != null)
+            dump.OnGarbageAmountUpdate -= OnGarbageAmountUpdate;
+    }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -31,7 +31,7 @@ public class Money
     {
         if(moneyAmount < amount)
         {
-            Debug.Log("Íåäîñòàòî÷íî äåíåã");
+            Debug.Log("ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ Ð´ÐµÐ½ÐµÐ³");
             return false;
 
         }

@@ -1,42 +1,42 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 [CreateAssetMenu(fileName = "FactoryUpgradeSettings", menuName = "LD48/FactoryUpgrade")]
 public class FactoryUpgradeSettings : ScriptableObject
 {
 
     /// <summary>
-    /// Снижение загрязнения воздуха
+    /// РЎРЅРёР¶РµРЅРёРµ Р·Р°РіСЂСЏР·РЅРµРЅРёСЏ РІРѕР·РґСѓС…Р°
     /// </summary>
     public float AirPollutionDecreaseAmount { get { return airPollutionDecreaseAmount; } }
 
     /// <summary>
-    /// Снижение загрязнения леса
+    /// РЎРЅРёР¶РµРЅРёРµ Р·Р°РіСЂСЏР·РЅРµРЅРёСЏ Р»РµСЃР°
     /// </summary>
     public float ForesPollutionDecreaseAmount { get { return foresPollutionDecreaseAmount; } }
 
     /// <summary>
-    /// Снижение загрязнения воздуха
+    /// РЎРЅРёР¶РµРЅРёРµ Р·Р°РіСЂСЏР·РЅРµРЅРёСЏ РІРѕР·РґСѓС…Р°
     /// </summary>
     public float WaterPollutionDecreaseAmount { get { return waterPollutionDecreaseAmount; } }
 
     /// <summary>
-    /// Цена улучшения
+    /// Р¦РµРЅР° СѓР»СѓС‡С€РµРЅРёСЏ
     /// </summary>
     public int UpgradeCost { get { return upgradeCost; } }
 
-    [Tooltip("Снижение загрязнения воздуха")]
+    [Tooltip("РЎРЅРёР¶РµРЅРёРµ Р·Р°РіСЂСЏР·РЅРµРЅРёСЏ РІРѕР·РґСѓС…Р°")]
     [SerializeField]
     private float airPollutionDecreaseAmount;
 
-    [Tooltip("Снижение загрязнения леса")]
+    [Tooltip("РЎРЅРёР¶РµРЅРёРµ Р·Р°РіСЂСЏР·РЅРµРЅРёСЏ Р»РµСЃР°")]
     [SerializeField]
     private float foresPollutionDecreaseAmount;
 
-    [Tooltip("Снижение загрязнения воздуха")]
+    [Tooltip("РЎРЅРёР¶РµРЅРёРµ Р·Р°РіСЂСЏР·РЅРµРЅРёСЏ РІРѕР·РґСѓС…Р°")]
     [SerializeField]
     private float waterPollutionDecreaseAmount;
 
-    [Tooltip("Цена улучшения")]
+    [Tooltip("Р¦РµРЅР° СѓР»СѓС‡С€РµРЅРёСЏ")]
     [SerializeField]
     private int upgradeCost;
 }
