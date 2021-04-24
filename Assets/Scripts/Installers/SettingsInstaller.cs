@@ -7,6 +7,8 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 {
     public Money.Settings Money;
     public Dissatisfied.Settings Dissatisfied;
+    public CarSpawner.Settings CarSpawner;
+    public Dump.Settings Dump;
     //[Header("Настройки таймера")]
     //public SomeService.Settings Timer;
 
@@ -33,6 +35,8 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     {
         Container.BindInstance(Money);
         Container.BindInstance(Dissatisfied);
+        Container.BindInstance(CarSpawner);
+        Container.BindInstance(Dump);
 //        Container.BindInstance(Timer);
 //        Container.BindInstance(UI.Task);
 //        Container.BindInstance(UI.TaskList);

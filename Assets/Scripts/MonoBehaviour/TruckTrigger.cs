@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class TruckTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject dump;
+    [SerializeField] private GameObject dumpObject;
+    private Dump dump;
+
+    [Inject]
+    public void Constract(Dump dump)
+    {
+        this.dump = dump;
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if(this.gameObject == dump)
+        if (this.gameObject == dumpObject)
         {
-            //Вызвать метод обработки;
+            dump.GetResources();
         }
     }
 }
