@@ -5,6 +5,8 @@ using Zenject;
 [CreateAssetMenu(fileName = "SettingsInstaller", menuName = "Installers/SettingsInstaller")]
 public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 {
+    public Money.Settings Money;
+    public Dissatisfied.Settings Dissatisfied;
     //[Header("Настройки таймера")]
     //public SomeService.Settings Timer;
 
@@ -26,6 +28,8 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 
     public override void InstallBindings()
     {
+        Container.BindInstance(Money);
+        Container.BindInstance(Dissatisfied);
 //        Container.BindInstance(Timer);
 //        Container.BindInstance(UI.Task);
 //        Container.BindInstance(UI.TaskList);
