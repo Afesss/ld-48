@@ -6,7 +6,7 @@ public class TruckBehaviour : MonoBehaviour, IPoolObject
 {
     #region Variables
     [SerializeField] private Rigidbody _rigidbody;
-    [Range(0,20)][SerializeField] private float moveSpeed;
+    [Range(0,100)][SerializeField] private float moveSpeed;
     [Range(0,1)][SerializeField] private float rotationSlerpSpeed;
     [Range(0,5)][SerializeField] private float minDistanceToTarget;
 
@@ -40,8 +40,8 @@ public class TruckBehaviour : MonoBehaviour, IPoolObject
             }
             Quaternion lookAtTarget = Quaternion.LookRotation(moveVector);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookAtTarget, rotationSlerpSpeed);
-            transform.Translate(0, 0, moveSpeed * Time.deltaTime);
-                
+            //transform.Translate(0, 0, moveSpeed * Time.deltaTime);
+            _rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
         }
     }
     private void OnTriggerEnter(Collider other)

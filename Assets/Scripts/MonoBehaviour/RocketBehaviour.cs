@@ -17,19 +17,8 @@ public class RocketBehaviour : MonoBehaviour
     [SerializeField] private AnimationCurve curve;
 
     private float startYPosition;
-
-    private Settings settings;
-    private Money money;
     #endregion
 
-    #region Construct
-    [Inject]
-    private void Construct(Settings settings,Money money)
-    {
-        this.settings = settings;
-        this.money = money;
-    }
-    #endregion
 
     #region Methods
     private void Awake()
@@ -51,16 +40,10 @@ public class RocketBehaviour : MonoBehaviour
     }
     public void RocketLauncher()
     {
-        if(money.moneyAmount < settings.rocketCost)
-        {
-            //TODO: Delete in production.
-            Debug.Log("Недостаточно денег");
-            return;
-        }
         startYPosition = rocket.position.y;
         StartCoroutine(WaitSecondToStartRocket());
-        
     }
+
     private IEnumerator RocetStart()
     {
         while (true)
@@ -86,15 +69,6 @@ public class RocketBehaviour : MonoBehaviour
         rocketAnim.Play();
         yield return new WaitForSeconds(1);
         platformAnim.Play();
-    }
-    #endregion
-
-    #region Struct
-    [Serializable]
-    public struct Settings
-    {
-        [Tooltip("Стоимость запуска ракеты")]
-        public int rocketCost;
     }
     #endregion
 }

@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: -950174729606034178}
-  moveSpeed: 10
+  moveSpeed: 50
   rotationSlerpSpeed: 0.1
   minDistanceToTarget: 3
 --- !u!54 &-950174729606034178

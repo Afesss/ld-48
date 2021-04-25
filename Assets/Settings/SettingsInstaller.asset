@@ -18,7 +18,7 @@ MonoBehaviour:
   Money:
     startAmount: 0
   Dissatisfied:
-    maxDissatified: 0
+    maxDissatified: 1000
   CarSpawner:
     StartTimeToCarSpawn: 5
     decreaseStepTimeToCarSpawn: 1
@@ -27,13 +27,14 @@ MonoBehaviour:
   Dump:
     maxStorageGarbageAmount: 1000
     deliveredGarbageByOneTruck: 50
-    deliveredMoneyByOneTruck: 100
+    deliveredMoneyByOneTruck: 1000
   Rocket:
-    rocketCost: 0
+    BuildPrice: 1000
+    LaunchPrice: 3000
   Ecology:
-    MaxAirValue: 0
-    MaxForestValue: 0
-    MaxWaterValue: 0
+    MaxAirValue: 1000
+    MaxForestValue: 1000
+    MaxWaterValue: 1000
   Factory:
   - type: 0
     settings:

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Ecology
 {
-    public delegate void PollutionExceededAction(Type type);
-    public event PollutionExceededAction OnPollutionExceeded;
+    public delegate void EcologyAction(Type type);
+    public event EcologyAction OnPollutionExceeded;
+    public event EcologyAction OnEcologyChange;
 
     private Settings settings;
 
@@ -18,12 +19,17 @@ public class Ecology
         values = new float[count];
     }
 
+    public float GetRate(Type type)
+    {
+        return values[(int)type] / GetMaxValue(type);
+    }
+
     /// <summary>
     /// Получить текущий процентный показатель загрязнения.
     /// Берется по максимальному параметру загрязнения.
     /// </summary>
     /// <returns>Процент загрязнения</returns>
-    public float GetCurrenPollutionRate()
+    public float GetCurrenMaxPollutionRate()
     {
         float maxValue = values.Max();
         int maxIndex = values.ToList().IndexOf(maxValue);
@@ -39,6 +45,7 @@ public class Ecology
     public void AddParameter(Type type, float value)
     {
         values[(int)type] += value;
+        OnEcologyChange?.Invoke(type);
         if (values[(int)type] > GetMaxValue(type))
         {
             OnPollutionExceeded?.Invoke(type);

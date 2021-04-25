@@ -28,7 +28,7 @@ public class Money
         moneyAmount += amount;
         OnMoneyAmountChange?.Invoke();
     }
-    internal bool SubtractMonet(int amount)
+    internal bool SubtractMoney(int amount)
     {
         if(moneyAmount < amount)
         {

@@ -15,6 +15,13 @@ public class FactoryController : MonoBehaviour, IBuildController
     [SerializeField]
     private ObjectSelectionController controller;
 
+    [SerializeField]
+    internal Transform spawnPoint;
+
+    [SerializeField]
+    internal Transform[] wayPoints;
+
+
     private int factoryUpgradeLevel = 0;
     private Factory factory;
 
@@ -83,13 +90,22 @@ public class FactoryController : MonoBehaviour, IBuildController
     {
         if (dump.SendGarbage(factory.Settings.GarbageAmountDemand))
         {
-            if (factory.AddGarbageToStorage(factory.Settings.GarbageAmountDemand))
-            {
-                factoryView.UpdateStorage(factory.GetStorageSpaceRate());
-
-            }
+            if (factory.GetFreeStorageSpace() > factory.Settings.GarbageAmountDemand)
+                dump.SendTruck(spawnPoint, wayPoints);
         }
-        Debug.Log("Try to Interact");
+    }
+
+    private void OnGarbageArrived()
+    {
+        if (factory.AddGarbageToStorage(factory.Settings.GarbageAmountDemand))
+        {
+            factoryView.UpdateStorage(factory.GetStorageSpaceRate());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        OnGarbageArrived();
     }
 
     private void OnDestroy()

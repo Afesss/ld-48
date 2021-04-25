@@ -102,7 +102,7 @@ public class Factory
         {
             var upgradeSettings = settings.Upgrades[currentUpgrade];
 
-            if (money.SubtractMonet(upgradeSettings.UpgradeCost))
+            if (money.SubtractMoney(upgradeSettings.UpgradeCost))
             {
                 currentAirPollutionPerSecond = upgradeSettings.AirPollutionDecreaseAmount;
                 currentForestPollutionPerSecond = upgradeSettings.ForesPollutionDecreaseAmount;
@@ -118,7 +118,7 @@ public class Factory
 
     public bool DoBuild()
     {
-        if (money.SubtractMonet(settings.BuildPrice))
+        if (money.SubtractMoney(settings.BuildPrice))
             return true;
         return false;
     }
@@ -151,7 +151,6 @@ public class Factory
     {
         if (isBurning)
         {
-            Debug.Log(currentStorageAmount);
             currentStorageAmount -= settings.BurnAmountPerTick * Time.deltaTime;
             if (currentStorageAmount < 0)
                 StopBurn();
@@ -168,16 +167,16 @@ public class Factory
         switch (type)
         {
             case Type.Water:
-                ecology.AddParameter(Ecology.Type.Water, currentWaterPollutionPerSecond);
-                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond);
-                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond);
+                ecology.AddParameter(Ecology.Type.Water, currentWaterPollutionPerSecond * Time.deltaTime);
+                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond * Time.deltaTime);
+                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond * Time.deltaTime);
                 break;
             case Type.Forest:
-                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond);
-                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond);
+                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond * Time.deltaTime);
+                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond * Time.deltaTime);
                 break;
             case Type.Air:
-                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond);
+                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond * Time.deltaTime);
                 break;
         }
     }
