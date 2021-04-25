@@ -37,7 +37,6 @@ public class Dump
         }
 
         money.AddMoney(settings.deliveredMoneyByOneTruck);
-        Debug.Log("*___*");
     }
     internal void SendGarbage(float amount)
     {
@@ -48,6 +47,7 @@ public class Dump
         }
         else
         {
+            //TODO: delete in production.
             Debug.Log("Недостаточной мусора для отправки");
         }
     }
@@ -62,8 +62,11 @@ public class Dump
     [Serializable]
     public struct Settings
     {
+        [Tooltip("Максимальное количество допустимого мусора на складе")]
         public float maxStorageGarbageAmount;
+        [Tooltip("Количество доставляемого мусора одним грузовиком")]
         public float deliveredGarbageByOneTruck;
+        [Tooltip("Количество доставляемых денег одним грузовиком")]
         public int deliveredMoneyByOneTruck;
     }
     #endregion

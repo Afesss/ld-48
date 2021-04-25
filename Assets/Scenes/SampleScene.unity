@@ -355,6 +355,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2acfad458243f4487b4dbc51e3c00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &321144591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8966415458543171602, guid: 766e748003e86d04f98348061d3f88a6, type: 3}
+  m_PrefabInstance: {fileID: 6713627386969910173}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &321144593
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321144591}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bbfdc5f831b1daf4eb418fc8550d1f54, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bbfdc5f831b1daf4eb418fc8550d1f54, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &321144594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321144591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a62646b1574234e9f6574cb5e29697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  rocket: {fileID: 0}
+  flySpeed: 0
+  flyDistanceToExplosion: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,6 +839,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2024054021367717159, guid: 766e748003e86d04f98348061d3f88a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.0000014665313
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024054021367717159, guid: 766e748003e86d04f98348061d3f88a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.0000015901561
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024054021367717159, guid: 766e748003e86d04f98348061d3f88a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 48.36612
+      objectReference: {fileID: 0}
     - target: {fileID: 6733702670854989853, guid: 766e748003e86d04f98348061d3f88a6, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.5
