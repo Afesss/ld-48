@@ -5,6 +5,8 @@ using Zenject;
 [CreateAssetMenu(fileName = "SettingsInstaller", menuName = "Installers/SettingsInstaller")]
 public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 {
+    [Header("Настройки пула грузовиков")]
+    public TruckPool.Settings Truck;
     [Header("Настройки денег")]
     public Money.Settings Money;
     [Header("Настройки недовольства")]
@@ -44,6 +46,7 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
         Container.BindInstance(CarSpawner);
         Container.BindInstance(Dump);
         Container.BindInstance(Rocket);
+        Container.BindInstance(Truck);
 //        Container.BindInstance(Timer);
 //        Container.BindInstance(UI.Task);
 //        Container.BindInstance(UI.TaskList);

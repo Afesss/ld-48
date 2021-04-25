@@ -9,6 +9,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<CarSpawner>().AsSingle();
         Container.BindInterfacesAndSelfTo<Dump>().AsSingle();
         Container.BindInterfacesAndSelfTo<RocketBehaviour>().AsSingle();
+        Container.BindInterfacesAndSelfTo<TruckPool>().AsSingle();
         //Container.Bind<SomeService>().AsSingle();
         //Container.BindInterfacesAndSelfTo<SomeService>().AsSingle();
         Container.BindInterfacesAndSelfTo<Ecology>().AsSingle();

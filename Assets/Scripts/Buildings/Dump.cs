@@ -12,12 +12,14 @@ public class Dump
     #region Variables
     private float currentStorageGarbage = 0;
     private Settings settings;
+    private TruckPool truckPool;
     private Money money;
     #endregion
 
     #region Construct
-    public Dump(Settings settings, Money money)
+    public Dump(Settings settings, Money money,TruckPool truckPool)
     {
+        this.truckPool = truckPool;
         this.settings = settings;
         this.money = money;
     }
@@ -51,7 +53,11 @@ public class Dump
             Debug.Log("Недостаточной мусора для отправки");
         }
     }
-
+    public void SendTruck(TruckRoute truckRoute)
+    {
+        TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
+        car.SetPath(truckRoute);
+    }
     internal float GetGarbageAmountRate()
     {
         return currentStorageGarbage / settings.maxStorageGarbageAmount;
