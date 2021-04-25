@@ -9,6 +9,8 @@ public class Dump
     internal event Action<UIGameOver.GameOverVersion> DumpGameOver;
     internal event Action OnGarbageAmountUpdate;
 
+    public float CurrentStorageGarbage { get { return currentStorageGarbage; } }
+
     #region Variables
     private float currentStorageGarbage = 0;
     private Settings settings;
@@ -40,21 +42,19 @@ public class Dump
 
         money.AddMoney(settings.deliveredMoneyByOneTruck);
     }
-    internal void SendGarbage(float amount)
+    internal bool SendGarbage(float amount)
     {
         if (currentStorageGarbage >= amount)
         {
             currentStorageGarbage -= amount;
             OnGarbageAmountUpdate?.Invoke();
+            return true;
         }
-        else
-        {
-            //TODO: delete in production.
-            Debug.Log("Недостаточной мусора для отправки");
-        }
+        return false;
     }
-    public void SendTruck(TruckRoute truckRoute)
+    public void SendTruck(Transform spawnPoint, Transform[] moveWayPoints)
     {
+        var truckRoute = new TruckRoute(spawnPoint, moveWayPoints);
         TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
         car.SetPath(truckRoute);
     }

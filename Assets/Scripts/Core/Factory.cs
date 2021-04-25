@@ -2,8 +2,9 @@
 using UnityEngine;
 using Zenject;
 
-public class Factory: ITickable
+public class Factory
 {
+    public FactorySet.Settings Settings { get { return settings; } }
 
     private FactorySet.Settings settings;
     private Money money;
@@ -51,6 +52,12 @@ public class Factory: ITickable
         return settings.StorageCapacity - currentStorageAmount;
     }
 
+
+    public float GetStorageSpaceRate()
+    {
+        return currentStorageAmount / settings.StorageCapacity;
+    }
+
     /// <summary>
     /// Добавляет на склад заданное количество мусора
     /// Если добавить не получилось возвращает false
@@ -95,7 +102,7 @@ public class Factory: ITickable
         {
             var upgradeSettings = settings.Upgrades[currentUpgrade];
 
-            if (money.SubtractMonet(upgradeSettings.UpgradeCost))
+            if (money.SubtractMoney(upgradeSettings.UpgradeCost))
             {
                 currentAirPollutionPerSecond = upgradeSettings.AirPollutionDecreaseAmount;
                 currentForestPollutionPerSecond = upgradeSettings.ForesPollutionDecreaseAmount;
@@ -109,6 +116,13 @@ public class Factory: ITickable
         return false;
     }
 
+    public bool DoBuild()
+    {
+        if (money.SubtractMoney(settings.BuildPrice))
+            return true;
+        return false;
+    }
+
     /// <summary>
     /// Возвращает стоимость следующего улучшения
     /// </summary>
@@ -117,7 +131,7 @@ public class Factory: ITickable
     {
         if (CanUpgrade())
             return settings.Upgrades[currentUpgrade].UpgradeCost;
-        return -1;
+        return 0;
     }
 
     /// <summary>
@@ -127,12 +141,13 @@ public class Factory: ITickable
     /// <returns>Можно ли улучшить</returns>
     public bool CanUpgrade()
     {
-        return 
-            currentUpgrade < settings.Upgrades.Length && 
-            money.moneyAmount >= settings.Upgrades[currentUpgrade].UpgradeCost;
+        return currentUpgrade < settings.Upgrades.Length;
     }
 
-    public void Tick()
+    /// <summary>
+    /// Жгем мусор каждый кадр
+    /// </summary>
+    public bool DoBurnJob()
     {
         if (isBurning)
         {
@@ -141,7 +156,10 @@ public class Factory: ITickable
                 StopBurn();
             IncreasePollution();
             dissatisfied.AddDissatisfied(settings.DissatisfiedAmountPerSecond * Time.deltaTime);
+
+            return true;
         }
+        return false;
     }
 
     private void IncreasePollution()
@@ -149,16 +167,16 @@ public class Factory: ITickable
         switch (type)
         {
             case Type.Water:
-                ecology.AddParameter(Ecology.Type.Water, currentWaterPollutionPerSecond);
-                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond);
-                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond);
+                ecology.AddParameter(Ecology.Type.Water, currentWaterPollutionPerSecond * Time.deltaTime);
+                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond * Time.deltaTime);
+                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond * Time.deltaTime);
                 break;
             case Type.Forest:
-                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond);
-                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond);
+                ecology.AddParameter(Ecology.Type.Forest, currentForestPollutionPerSecond * Time.deltaTime);
+                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond * Time.deltaTime);
                 break;
             case Type.Air:
-                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond);
+                ecology.AddParameter(Ecology.Type.Air, currentAirPollutionPerSecond * Time.deltaTime);
                 break;
         }
     }

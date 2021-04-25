@@ -18,7 +18,7 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     [Header("Настройки мусорнго полигона")]
     public Dump.Settings Dump;
     [Header("Настройки ракеты")]
-    public RocketBehaviour.Settings Rocket;
+    public RocketSettings Rocket;
     //[Header("Настройки таймера")]
     //public SomeService.Settings Timer;
 
