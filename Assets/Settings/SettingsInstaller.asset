@@ -17,10 +17,10 @@ MonoBehaviour:
   Dissatisfied:
     maxDissatified: 0
   CarSpawner:
-    StartTimeToCarSpawn: 0
-    decreaseStepTimeToCarSpawn: 0
-    minTimeToSpawnCar: 0
-    countCarToChangeTimeSpawn: 0
+    StartTimeToCarSpawn: 5
+    decreaseStepTimeToCarSpawn: 1
+    minTimeToSpawnCar: 0.5
+    countCarToChangeTimeSpawn: 1
   Dump:
     maxStorageGarbageAmount: 1000
     deliveredGarbageByOneTruck: 50

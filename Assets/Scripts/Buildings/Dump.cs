@@ -12,12 +12,14 @@ public class Dump
     #region Variables
     private float currentStorageGarbage = 0;
     private Settings settings;
+    private TruckPool truckPool;
     private Money money;
     #endregion
 
     #region Construct
-    public Dump(Settings settings, Money money)
+    public Dump(Settings settings, Money money,TruckPool truckPool)
     {
+        this.truckPool = truckPool;
         this.settings = settings;
         this.money = money;
     }
@@ -48,7 +50,11 @@ public class Dump
         }
         return false;
     }
-
+    public void SendTruck(TruckRoute truckRoute)
+    {
+        TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
+        car.SetPath(truckRoute);
+    }
     internal float GetGarbageAmountRate()
     {
         return currentStorageGarbage / settings.maxStorageGarbageAmount;
@@ -59,8 +65,11 @@ public class Dump
     [Serializable]
     public struct Settings
     {
+        [Tooltip("Максимальное количество допустимого мусора на складе")]
         public float maxStorageGarbageAmount;
+        [Tooltip("Количество доставляемого мусора одним грузовиком")]
         public float deliveredGarbageByOneTruck;
+        [Tooltip("Количество доставляемых денег одним грузовиком")]
         public int deliveredMoneyByOneTruck;
     }
     #endregion

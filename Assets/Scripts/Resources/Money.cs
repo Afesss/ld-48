@@ -46,6 +46,7 @@ public class Money
     [Serializable]
     public struct Settings
     {
+        [Tooltip("Стартовое количество денег")]
         public int startAmount;
     }
     #endregion
