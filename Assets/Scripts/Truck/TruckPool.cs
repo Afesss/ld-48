@@ -16,8 +16,8 @@ public class TruckPool
     [Serializable]
     public struct Settings
     {
-        public TruckBehaviour carPrefab;
-        public int poolCarCount;
+        public TruckBehaviour turckPrefab;
+        public int poolTruckCount;
     }
 
 }

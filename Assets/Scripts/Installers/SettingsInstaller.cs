@@ -8,7 +8,7 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     [Header("Image UI Game Over")]
     public UIGameOver.Settings UIGameOver;
     [Header("Настройки пула грузовиков")]
-    public TruckPool.Settings Truck;
+    public TruckPool.Settings TruckPool;
     [Header("Настройки денег")]
     public Money.Settings Money;
     [Header("Настройки недовольства")]
@@ -48,7 +48,7 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
         Container.BindInstance(CarSpawner);
         Container.BindInstance(Dump);
         Container.BindInstance(Rocket);
-        Container.BindInstance(Truck);
+        Container.BindInstance(TruckPool);
         Container.BindInstance(UIGameOver);
 //        Container.BindInstance(Timer);
 //        Container.BindInstance(UI.Task);

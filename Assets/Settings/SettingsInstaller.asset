@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65942e415c910240963a5b8770c9570, type: 3}
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
-  Truck:
-    carPrefab: {fileID: -4457851349881614221, guid: c108094e91bcbf247aa2d228eed83867, type: 3}
-    poolCarCount: 20
+  UIGameOver:
+    dumpGameOver: {fileID: 0}
+    airGameOver: {fileID: 0}
+    forestGameOver: {fileID: 0}
+    waterGameOver: {fileID: 0}
+    rocketGameOver: {fileID: 0}
+    dissatisfiedGameOver: {fileID: 0}
+  TruckPool:
+    turckPrefab: {fileID: 5803330403083096111, guid: 5bb6122434c70d94fad95fcc8f72ab53, type: 3}
+    poolTruckCount: 20
   Money:
     startAmount: 0
   Dissatisfied:
