@@ -7,40 +7,38 @@ using System;
 public class CarSpawner : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private CarBehaviour carPrefab;
+    //[SerializeField] private CarBehaviour carPrefab;
+    [SerializeField] private TruckWayPoints truckWayPoints;
     [SerializeField] private Transform target;
-    [SerializeField] private int poolCarCount;
+    //[SerializeField] private int poolCarCount;
 
-    private PoolingService<CarBehaviour> carPollService = null;
+    //public PoolingService<CarBehaviour> carPollService { get; private set; }
 
     private int currentSpawnCarAmount = 0;
     private float timeToSpawnCar;
-    
+    private TruckPool truckPool;
     private Settings settings;
     #endregion
 
     #region Construct
     [Inject]
-    public void Construct(Settings settings)
+    public void Construct(Settings settings,TruckPool truckPool)
     {
         this.settings = settings;
+        this.truckPool = truckPool;
     }
     #endregion
 
     #region Methods
     private void Start()
     {
-        if (carPrefab != null)
-        {
-            carPollService = new PoolingService<CarBehaviour>(carPrefab, poolCarCount, transform, true);
-        }
         timeToSpawnCar = settings.StartTimeToCarSpawn;
         StartCoroutine(CarsSpawner());
     }
     private IEnumerator CarsSpawner()
     {
-        CarBehaviour car = carPollService.GetFreeElement();
-        car.SetPath(transform.position,target.position);
+        TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
+        car.SetPath(new TruckRoute(truckWayPoints.SpawnPoint,truckWayPoints.WayPoints));
 
         currentSpawnCarAmount++;
         if(currentSpawnCarAmount > settings.countCarToChangeTimeSpawn)

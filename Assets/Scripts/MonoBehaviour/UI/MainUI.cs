@@ -7,19 +7,23 @@ using Zenject;
 
 public class MainUI : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject menuCamera;
-    [SerializeField] private AudioListener audioListener;
+    [SerializeField] private GameObject hidOnStart;
     private GameManager gameManager;
     private bool gameRunning = false;
+    #endregion
 
+    #region Construct
     [Inject]
     public void Construct(GameManager gameManager)
     {
-        Debug.Log(gameManager);
         this.gameManager = gameManager;
     }
-    
+    #endregion
+
+    #region Methods
     protected void Awake()
     {
         DontDestroyOnLoad(this);
@@ -33,8 +37,8 @@ public class MainUI : MonoBehaviour
     {
         gameManager.StartGame();
         gameRunning = true;
-
-        audioListener.enabled = false;
+        
+        hidOnStart.SetActive(false);
         mainMenu.SetActive(false);
         StartCoroutine(CameraHid());
     }
@@ -72,4 +76,5 @@ public class MainUI : MonoBehaviour
     {
         Application.OpenURL("https://vk.com/whitecubegames");
     }
+    #endregion
 }

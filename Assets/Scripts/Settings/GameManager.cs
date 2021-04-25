@@ -7,6 +7,7 @@ using Zenject;
 
 public class GameManager : IInitializable
 {
+    #region Enum
     private enum GameScene
     {
         MENU,
@@ -18,10 +19,14 @@ public class GameManager : IInitializable
         RUNNING,
         PAUSE
     }
+    #endregion
 
+    #region Variables
     internal GameState currentGameState { get; private set; }
     private List<AsyncOperation> loadOperations = new List<AsyncOperation>();
-   
+    #endregion
+
+    #region Methods
     public void Initialize()
     {
         currentGameState = GameState.PREGAME;
@@ -87,6 +92,5 @@ public class GameManager : IInitializable
         }
         currentGameState = gameState;
     }
-
-    
+    #endregion
 }

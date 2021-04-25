@@ -6,6 +6,7 @@ using System;
 
 public class RocketBehaviour : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private Animation platformAnim;
     [SerializeField] private Animation rocketAnim;
     [SerializeField] private Transform rocket;
@@ -19,13 +20,18 @@ public class RocketBehaviour : MonoBehaviour
 
     private Settings settings;
     private Money money;
+    #endregion
 
+    #region Construct
     [Inject]
     private void Construct(Settings settings,Money money)
     {
         this.settings = settings;
         this.money = money;
     }
+    #endregion
+
+    #region Methods
     private void Awake()
     {
         explosion.Stop();
@@ -81,10 +87,14 @@ public class RocketBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1);
         platformAnim.Play();
     }
+    #endregion
+
+    #region Struct
     [Serializable]
     public struct Settings
     {
         [Tooltip("Стоимость запуска ракеты")]
         public int rocketCost;
     }
+    #endregion
 }
