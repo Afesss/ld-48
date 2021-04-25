@@ -6,7 +6,7 @@ using Zenject;
 
 public class Dump
 {
-    internal event Action DumpGameOver;
+    internal event Action<UIGameOver.GameOverVersion> DumpGameOver;
     internal event Action OnGarbageAmountUpdate;
 
     public float CurrentStorageGarbage { get { return currentStorageGarbage; } }
@@ -32,7 +32,7 @@ public class Dump
     {
         if (currentStorageGarbage > settings.maxStorageGarbageAmount)
         {
-            DumpGameOver?.Invoke();
+            DumpGameOver?.Invoke(UIGameOver.GameOverVersion.Dump);
         }
         else
         {
