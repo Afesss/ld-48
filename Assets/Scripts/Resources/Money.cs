@@ -31,6 +31,7 @@ public class Money
     {
         if(moneyAmount < amount)
         {
+            //TODO: Delet in production.
             Debug.Log("Недостаточно денег");
             return false;
 
@@ -47,6 +48,7 @@ public class Money
     [Serializable]
     public struct Settings
     {
+        [Tooltip("Стартовое количество денег")]
         public int startAmount;
     }
     #endregion
