@@ -29,8 +29,8 @@ public class TruckSpawner : MonoBehaviour
     private void Start()
     {
         timeToSpawnCar = settings.StartTimeToCarSpawn;
-        truckPool.truckPollService = new PoolingService<TruckBehaviour>(truckPool.settings.carPrefab, 
-            truckPool.settings.poolCarCount, pool, true);
+        truckPool.truckPollService = new PoolingService<TruckBehaviour>(truckPool.settings.turckPrefab, 
+            truckPool.settings.poolTruckCount, pool, true);
         StartCoroutine(CarsSpawner());
     }
     private IEnumerator CarsSpawner()

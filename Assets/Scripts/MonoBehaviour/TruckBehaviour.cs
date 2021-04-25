@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Zenject;
 
 public class TruckBehaviour : MonoBehaviour, IPoolObject
 {
     #region Variables
     [SerializeField] private Rigidbody _rigidbody;
-    [Range(0,100)][SerializeField] private float moveSpeed;
-    [Range(0,1)][SerializeField] private float rotationSlerpSpeed;
-    [Range(0,5)][SerializeField] private float minDistanceToTarget;
+    [Range(0, 20)] [SerializeField] private float moveSpeed;
+    [Range(0, 1)] [SerializeField] private float rotationLerpSpeed;
+    [Range(0, 10)] [SerializeField] private float minDistanceToTarget;
 
     private bool grounded;
+
     private Vector3 targetPosition;
     private Vector3 moveVector;
     private TruckRoute route;
@@ -39,9 +42,9 @@ public class TruckBehaviour : MonoBehaviour, IPoolObject
                 route.ChangeWayPoint();
             }
             Quaternion lookAtTarget = Quaternion.LookRotation(moveVector);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookAtTarget, rotationSlerpSpeed);
-            //transform.Translate(0, 0, moveSpeed * Time.deltaTime);
-            _rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookAtTarget, rotationLerpSpeed);
+            transform.Translate(0, 0, moveSpeed * Time.deltaTime);
+
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -56,6 +59,6 @@ public class TruckBehaviour : MonoBehaviour, IPoolObject
     {
         grounded = false;
     }
-    
+
     #endregion
 }
