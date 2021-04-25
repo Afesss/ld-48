@@ -10,9 +10,8 @@ public class MainUI : MonoBehaviour
     #region Variables
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject menuCamera;
-    [SerializeField] private GameObject hidOnStart;
+    [SerializeField] private GameObject mainEventSystem;
     private GameManager gameManager;
-    private bool gameRunning = false;
     #endregion
 
     #region Construct
@@ -27,18 +26,20 @@ public class MainUI : MonoBehaviour
     protected void Awake()
     {
         DontDestroyOnLoad(this);
+        gameManager.OnGameOver += Pause;
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && 
+            gameManager.currentGameState != GameManager.GameState.GAME_OVER)
             Pause();
     }
+    
     public void NewGame()
     {
         gameManager.StartGame();
-        gameRunning = true;
         
-        hidOnStart.SetActive(false);
+        mainEventSystem.SetActive(false);
         mainMenu.SetActive(false);
         StartCoroutine(CameraHid());
     }
@@ -49,7 +50,8 @@ public class MainUI : MonoBehaviour
     }
     public void Ñontinue()
     {
-        if (gameRunning)
+        if (gameManager.currentGameState == GameManager.GameState.PAUSE && 
+            gameManager.currentGameState != GameManager.GameState.GAME_OVER)
         {
             gameManager.UpdateGameState(GameManager.GameState.RUNNING);
             mainMenu.SetActive(false);
@@ -61,16 +63,15 @@ public class MainUI : MonoBehaviour
         StopAllCoroutines();
         menuCamera.SetActive(true);
         mainMenu.SetActive(true);
-
-        gameManager.UpdateGameState(GameManager.GameState.PAUSE);
+        if (gameManager.currentGameState != GameManager.GameState.GAME_OVER)
+        {
+            gameManager.UpdateGameState(GameManager.GameState.PAUSE);
+        }
     }
     public void Exit()
     {
+        gameManager.OnGameOver -= Pause;
         Application.Quit();
-    }
-    public void GameOver()
-    {
-        gameRunning = false;
     }
     public void Developers()
     {

@@ -7,6 +7,7 @@ using Zenject;
 
 public class GameManager : IInitializable
 {
+    internal event Action OnGameOver;
     #region Enum
     private enum GameScene
     {
@@ -17,7 +18,8 @@ public class GameManager : IInitializable
     {
         PREGAME,
         RUNNING,
-        PAUSE
+        PAUSE,
+        GAME_OVER
     }
     #endregion
 
@@ -68,7 +70,7 @@ public class GameManager : IInitializable
     {
         if (currentGameState != GameState.RUNNING)
         {
-            if (currentGameState == GameState.PAUSE)
+            if (currentGameState == GameState.PAUSE || currentGameState == GameState.GAME_OVER)
             {
                 UnloadScene(GameScene.GAME);
             }
@@ -76,7 +78,10 @@ public class GameManager : IInitializable
             UpdateGameState(GameState.RUNNING);
         }
     }
-
+    internal void OnGameOverInvoke()
+    {
+        OnGameOver?.Invoke();
+    }
     internal void UpdateGameState(GameState gameState)
     {
         switch (gameState)
@@ -88,6 +93,8 @@ public class GameManager : IInitializable
                 break;
             case GameState.PAUSE:
                 Time.timeScale = 0;
+                break;
+            case GameState.GAME_OVER:
                 break;
         }
         currentGameState = gameState;

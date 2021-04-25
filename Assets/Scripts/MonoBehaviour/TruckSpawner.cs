@@ -8,6 +8,7 @@ public class TruckSpawner : MonoBehaviour
 {
     #region Variables
     [SerializeField] private TruckWayPoints truckWayPoints;
+    [SerializeField] private Transform pool;
 
     private int currentSpawnCarAmount = 0;
     private float timeToSpawnCar;
@@ -28,6 +29,8 @@ public class TruckSpawner : MonoBehaviour
     private void Start()
     {
         timeToSpawnCar = settings.StartTimeToCarSpawn;
+        truckPool.truckPollService = new PoolingService<TruckBehaviour>(truckPool.settings.carPrefab, 
+            truckPool.settings.poolCarCount, pool, true);
         StartCoroutine(CarsSpawner());
     }
     private IEnumerator CarsSpawner()

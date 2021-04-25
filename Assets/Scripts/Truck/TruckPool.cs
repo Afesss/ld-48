@@ -4,19 +4,15 @@ using UnityEngine;
 using Zenject;
 using System;
 
-public class TruckPool : IInitializable
+public class TruckPool
 {
-    private Settings settings;
+    public Settings settings { get; private set; }
     public TruckPool(Settings settings)
     {
         this.settings = settings;
     }
-    public PoolingService<TruckBehaviour> truckPollService { get; private set; }
+    public PoolingService<TruckBehaviour> truckPollService { get; set; }
 
-    public void Initialize()
-    {
-        truckPollService = new PoolingService<TruckBehaviour>(settings.carPrefab, settings.poolCarCount,new GameObject("Pool").transform , true);
-    }
     [Serializable]
     public struct Settings
     {
