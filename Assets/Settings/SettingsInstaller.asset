@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65942e415c910240963a5b8770c9570, type: 3}
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
+  Truck:
+    carPrefab: {fileID: -4457851349881614221, guid: c108094e91bcbf247aa2d228eed83867, type: 3}
+    poolCarCount: 20
   Money:
     startAmount: 0
   Dissatisfied:
@@ -25,6 +28,8 @@ MonoBehaviour:
     maxStorageGarbageAmount: 1000
     deliveredGarbageByOneTruck: 50
     deliveredMoneyByOneTruck: 100
+  Rocket:
+    rocketCost: 0
   Ecology:
     MaxAirValue: 0
     MaxForestValue: 0
