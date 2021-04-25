@@ -2,8 +2,9 @@
 using UnityEngine;
 using Zenject;
 
-public class Factory: ITickable
+public class Factory
 {
+    public FactorySet.Settings Settings { get { return settings; } }
 
     private FactorySet.Settings settings;
     private Money money;
@@ -49,6 +50,12 @@ public class Factory: ITickable
     public float GetFreeStorageSpace()
     {
         return settings.StorageCapacity - currentStorageAmount;
+    }
+
+
+    public float GetStorageSpaceRate()
+    {
+        return currentStorageAmount / settings.StorageCapacity;
     }
 
     /// <summary>
@@ -109,6 +116,13 @@ public class Factory: ITickable
         return false;
     }
 
+    public bool DoBuild()
+    {
+        if (money.SubtractMonet(settings.BuildPrice))
+            return true;
+        return false;
+    }
+
     /// <summary>
     /// Возвращает стоимость следующего улучшения
     /// </summary>
@@ -117,7 +131,7 @@ public class Factory: ITickable
     {
         if (CanUpgrade())
             return settings.Upgrades[currentUpgrade].UpgradeCost;
-        return -1;
+        return 0;
     }
 
     /// <summary>
@@ -127,21 +141,26 @@ public class Factory: ITickable
     /// <returns>Можно ли улучшить</returns>
     public bool CanUpgrade()
     {
-        return 
-            currentUpgrade < settings.Upgrades.Length && 
-            money.moneyAmount >= settings.Upgrades[currentUpgrade].UpgradeCost;
+        return currentUpgrade < settings.Upgrades.Length;
     }
 
-    public void Tick()
+    /// <summary>
+    /// Жгем мусор каждый кадр
+    /// </summary>
+    public bool DoBurnJob()
     {
         if (isBurning)
         {
+            Debug.Log(currentStorageAmount);
             currentStorageAmount -= settings.BurnAmountPerTick * Time.deltaTime;
             if (currentStorageAmount < 0)
                 StopBurn();
             IncreasePollution();
             dissatisfied.AddDissatisfied(settings.DissatisfiedAmountPerSecond * Time.deltaTime);
+
+            return true;
         }
+        return false;
     }
 
     private void IncreasePollution()

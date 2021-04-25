@@ -22,14 +22,19 @@ public struct FactorySet
         [Tooltip("Вместимость хранилища завода")]
         public int StorageCapacity;
 
+        [Tooltip("Количество запрашиваемого мусора со свалки")]
+        public int GarbageAmountDemand;
+
         [Tooltip("Недовольства в секунду")]
         public float DissatisfiedAmountPerSecond;
 
         [Tooltip("Сжигания в секунду")]
         public float BurnAmountPerTick;
 
+        [Tooltip("Стоимость постройкн")]
+        public int BuildPrice;
+
         [Tooltip("Настройки улучшений")]
         public FactoryUpgradeSettings[] Upgrades;
     }
-
 }
