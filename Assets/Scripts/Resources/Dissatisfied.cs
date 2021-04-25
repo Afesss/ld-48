@@ -7,6 +7,7 @@ using Zenject;
 public class Dissatisfied
 {
     internal event Action DissatisfiedGameOver;
+    internal event Action OnSatisfactionChange;
 
     #region Variables
     private float currentDissatisfied, overallDissatisfied;
@@ -22,9 +23,15 @@ public class Dissatisfied
 
     #region Methods
     
+    internal float GetRate()
+    {
+        return currentDissatisfied / settings.maxDissatified;
+    }
+
     internal void AddDissatisfied(float amount)
     {
         currentDissatisfied += amount;
+        OnSatisfactionChange?.Invoke();
         CheckGameOver();
     }
     internal void SubtractDissatisfied(float amount)
@@ -37,6 +44,7 @@ public class Dissatisfied
         {
             currentDissatisfied -= amount;
         }
+        OnSatisfactionChange?.Invoke();
     }
     internal void CheckGameOver()
     {
