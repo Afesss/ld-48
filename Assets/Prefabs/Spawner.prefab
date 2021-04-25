@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6499101475388094536}
   - component: {fileID: 6499101475388094539}
+  - component: {fileID: 286157313}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -43,6 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40908b833e8c297479851b09b4bd9695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: -4457851349881614221, guid: c108094e91bcbf247aa2d228eed83867, type: 3}
-  target: {fileID: 0}
-  poolCarCount: 10
+  truckWayPoints: {fileID: 286157313}
+--- !u!114 &286157313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499101475388094538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30155d52920a0bd41905a80d692cdc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 6499101475388094536}
+  wayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -4,15 +4,10 @@ using UnityEngine;
 using Zenject;
 using System;
 
-public class CarSpawner : MonoBehaviour
+public class TruckSpawner : MonoBehaviour
 {
     #region Variables
-    //[SerializeField] private CarBehaviour carPrefab;
     [SerializeField] private TruckWayPoints truckWayPoints;
-    [SerializeField] private Transform target;
-    //[SerializeField] private int poolCarCount;
-
-    //public PoolingService<CarBehaviour> carPollService { get; private set; }
 
     private int currentSpawnCarAmount = 0;
     private float timeToSpawnCar;

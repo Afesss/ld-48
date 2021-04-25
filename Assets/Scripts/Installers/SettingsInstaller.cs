@@ -12,7 +12,7 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     [Header("Настройки недовольства")]
     public Dissatisfied.Settings Dissatisfied;
     [Header("Настройки грузовичков")]
-    public CarSpawner.Settings CarSpawner;
+    public TruckSpawner.Settings CarSpawner;
     [Header("Настройки мусорнго полигона")]
     public Dump.Settings Dump;
     [Header("Настройки ракеты")]
