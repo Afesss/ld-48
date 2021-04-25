@@ -42,7 +42,7 @@ public class Dissatisfied
     {
         if(currentDissatisfied > settings.maxDissatified)
         {
-            DissatisfiedGameOver();
+            DissatisfiedGameOver?.Invoke();
         }
     }
     #endregion

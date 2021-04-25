@@ -8,6 +8,7 @@ public class Money
 {
     #region Variables
     internal event Action OnMoneyAmountChange;
+    internal event Action OnNotEnoughMoney;
 
     internal int moneyAmount { get; private set; }
 
@@ -31,14 +32,12 @@ public class Money
     {
         if(moneyAmount < amount)
         {
-            Debug.Log("Недостаточно денег");
+            OnNotEnoughMoney?.Invoke();
             return false;
-
         }
 
         moneyAmount -= amount;
         OnMoneyAmountChange?.Invoke();
-        Debug.Log(moneyAmount);
         return true;
     }
     #endregion

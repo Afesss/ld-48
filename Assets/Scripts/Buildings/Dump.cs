@@ -37,19 +37,16 @@ public class Dump
         }
 
         money.AddMoney(settings.deliveredMoneyByOneTruck);
-        Debug.Log("*___*");
     }
-    internal void SendGarbage(float amount)
+    internal bool SendGarbage(float amount)
     {
         if (currentStorageGarbage >= amount)
         {
             currentStorageGarbage -= amount;
             OnGarbageAmountUpdate?.Invoke();
+            return true;
         }
-        else
-        {
-            Debug.Log("Недостаточной мусора для отправки");
-        }
+        return false;
     }
 
     internal float GetGarbageAmountRate()

@@ -12,5 +12,9 @@ public class GameInstaller : MonoInstaller
         //Container.BindInterfacesAndSelfTo<SomeService>().AsSingle();
         Container.BindInterfacesAndSelfTo<Ecology>().AsSingle();
         Container.Bind<FactorySet>().AsSingle();
+
+        SignalBusInstaller.Install(Container);
+        Container.DeclareSignal<SelectBuildObjectSignal>();
+        Container.DeclareSignal<DeselectBuildObjectSignal>();
     }
 }
