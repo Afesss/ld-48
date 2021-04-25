@@ -123,51 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &146684142
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 146684144}
-  - component: {fileID: 146684143}
-  m_Layer: 5
-  m_Name: HidOnStart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &146684143
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146684142}
-  m_Enabled: 1
---- !u!224 &146684144
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146684142}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 280189112}
-  m_Father: {fileID: 1882928623}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &280189111
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +134,7 @@ GameObject:
   - component: {fileID: 280189112}
   - component: {fileID: 280189114}
   - component: {fileID: 280189113}
+  - component: {fileID: 280189115}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -197,8 +153,8 @@ Transform:
   m_LocalPosition: {x: -673, y: -294.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 146684144}
-  m_RootOrder: 0
+  m_Father: {fileID: 1882928623}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &280189113
 MonoBehaviour:
@@ -234,6 +190,14 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!81 &280189115
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280189111}
+  m_Enabled: 1
 --- !u!1 &423246953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +1108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1968975296}
   menuCamera: {fileID: 1197002549}
-  hidOnStart: {fileID: 146684142}
+  mainEventSystem: {fileID: 280189111}
 --- !u!114 &1882928620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,7 +1183,7 @@ RectTransform:
   m_Children:
   - {fileID: 1968975299}
   - {fileID: 1197002552}
-  - {fileID: 146684144}
+  - {fileID: 280189112}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
