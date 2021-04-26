@@ -65,7 +65,7 @@ public class MainUI : MonoBehaviour
             }
         }
     }
-    public void Ñontinue()
+    public void Ã‘ontinue()
     {
         if (gameManager.currentGameState == GameManager.GameState.PAUSE && 
             gameManager.previousGameState != GameManager.GameState.GAME_OVER)
