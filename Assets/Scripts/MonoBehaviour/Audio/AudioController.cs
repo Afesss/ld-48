@@ -5,11 +5,16 @@ using Zenject;
 using System;
 public static class AudioEventBroker
 {
-    public static event Action OnAudioEvent;
+    public static event Action OnAudioClikEvent;
+    public static event Action<float> OnPollutionRate;
     public static event Action OnResetAudio;
-    public static void OnAudioEventInvoke()
+    public static void OnAudioClikEventInvoke()
     {
-        OnAudioEvent?.Invoke();
+        OnAudioClikEvent?.Invoke();
+    }
+    public static void OnPollutionRateInvoke(float pollutionRate)
+    {
+        OnPollutionRate?.Invoke(pollutionRate);
     }
     public static void OnResetAudioInvoke()
     {
@@ -57,28 +62,62 @@ public class AudioController : MonoBehaviour
         backgroundAudioSource.Play();
 
         currentGameAudioClip = audioSettings.easyGame;
-
-        
     }
     
     private void OnDestroy()
     {
-        AudioEventBroker.OnAudioEvent -= PlayConstructAudio;
+        AudioEventBroker.OnAudioClikEvent -= PlayConstructAudio;
+        AudioEventBroker.OnPollutionRate -= OnPollutionRate;
         AudioEventBroker.OnResetAudio -= OnResetAudio;
     }
     private void Start()
     {
         gameManager.OnChangeAudio += ChangeBackgroundAudio;
 
-        AudioEventBroker.OnAudioEvent += PlayConstructAudio;
+        AudioEventBroker.OnAudioClikEvent += PlayConstructAudio;
+        AudioEventBroker.OnPollutionRate += OnPollutionRate;
         AudioEventBroker.OnResetAudio += OnResetAudio;
     }
 
     private void OnResetAudio()
     {
-        backgroundAudioSource.Stop();
-        backgroundAudioSource.clip = audioSettings.mainMenu;
-        backgroundAudioSource.Play();
+        currentGameAudioClip = audioSettings.easyGame;
+        backgroundAudioSource.clip = currentGameAudioClip;
+    }
+
+    private void OnPollutionRate(float pollutionRate)
+    {
+        
+        if (gameManager.currentGameState != GameManager.GameState.RUNNING)
+        {
+            return;
+        }
+
+        if (pollutionRate < 0.3f)
+        {
+            if (currentGameAudioClip == audioSettings.easyGame)
+                return;
+            currentGameAudioClip = audioSettings.easyGame;
+            backgroundAudioSource.clip = currentGameAudioClip;
+            backgroundAudioSource.Play();
+        }
+        else if(pollutionRate > 0.6)
+        {
+            if (currentGameAudioClip == audioSettings.hardGame)
+                return;
+            currentGameAudioClip = audioSettings.hardGame;
+            backgroundAudioSource.clip = currentGameAudioClip;
+            backgroundAudioSource.Play();
+        }
+        else
+        {
+            if (currentGameAudioClip == audioSettings.mediumGame)
+                return;
+            currentGameAudioClip = audioSettings.mediumGame;
+            backgroundAudioSource.clip = currentGameAudioClip;
+            backgroundAudioSource.Play();
+        }
+
     }
 
     private void PlayConstructAudio()
@@ -114,5 +153,6 @@ public class AudioController : MonoBehaviour
     private void OnDisable()
     {
         gameManager.OnChangeAudio -= ChangeBackgroundAudio;
+
     }
 }

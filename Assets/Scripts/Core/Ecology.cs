@@ -18,7 +18,13 @@ public class Ecology
         var count = Enum.GetNames(typeof(Type)).Length;
         values = new float[count];
     }
-
+    public void ResetVuluesArray()
+    {
+        for(int i = 0; i < values.Length; i++)
+        {
+            values[i] = 0;
+        }
+    }
     public float GetRate(Type type)
     {
         return values[(int)type] / GetMaxValue(type);
@@ -34,7 +40,9 @@ public class Ecology
         float maxValue = values.Max();
         int maxIndex = values.ToList().IndexOf(maxValue);
 
-        return maxValue / GetMaxValue((Type)maxIndex);
+        float pollutionRate = maxValue / GetMaxValue((Type)maxIndex);
+        AudioEventBroker.OnPollutionRateInvoke(pollutionRate);
+        return pollutionRate;
     }
 
     /// <summary>

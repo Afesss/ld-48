@@ -65,7 +65,8 @@ public class UIGameOver : MonoBehaviour
     }
     public void EnableGameOver(GameOverVersion version)
     {
-        if(gameManager.currentGameState == GameManager.GameState.GAME_OVER)
+        if(gameManager.currentGameState == GameManager.GameState.GAME_OVER ||
+            gameManager.previousGameState == GameManager.GameState.GAME_OVER)
         {
             return;
         }
@@ -102,7 +103,6 @@ public class UIGameOver : MonoBehaviour
     {
         factoryMaterials.ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
         gameOverMenu.SetActive(false);
-        AudioEventBroker.OnResetAudioInvoke();
         gameManager.OnGameOverInvoke();
         
     }

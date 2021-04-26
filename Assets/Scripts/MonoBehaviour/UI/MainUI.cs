@@ -37,16 +37,17 @@ public class MainUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) &&
-            gameManager.currentGameState != GameManager.GameState.GAME_OVER)
+        if (Input.GetKeyDown(KeyCode.Escape) && 
+            gameManager.currentGameState == GameManager.GameState.RUNNING)
         {
             Pause();
         }
     }
     public void NewGame()
     {
+        AudioEventBroker.OnResetAudioInvoke();
         signalBus.Fire(new MainMenuSignal());
-
+        
         gameManager.StartGame();
 
         mainEventSystem.SetActive(false);
@@ -66,7 +67,7 @@ public class MainUI : MonoBehaviour
             }
         }
     }
-    public void Ñontinue()
+    public void Continue()
     {
         if (gameManager.currentGameState == GameManager.GameState.PAUSE && 
             gameManager.previousGameState != GameManager.GameState.GAME_OVER)

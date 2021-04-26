@@ -32,13 +32,14 @@ public class FactoryMaterialsHandler : IInitializable
     private void Ecology_OnEcologyChange(Ecology.Type type)
     {
         float currentRate = ecology.GetCurrenMaxPollutionRate();
-        if (currentRate > 0.3f)
-        {
-            ChangeFactoryMaterialColor(EcologyPollutionState.Medium);
-        }
-        else if(currentRate > 0.6f)
+        if (currentRate > 0.6f)
         {
             ChangeFactoryMaterialColor(EcologyPollutionState.Hard);
+            
+        }
+        else if(currentRate > 0.3f)
+        {
+            ChangeFactoryMaterialColor(EcologyPollutionState.Medium);
         }
     }
 
