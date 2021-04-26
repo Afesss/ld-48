@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 using System;
+using System.Collections;
 
 public class UIGameOver : MonoBehaviour
 {
@@ -60,7 +61,12 @@ public class UIGameOver : MonoBehaviour
     }
     private void EnableGameOver(RocketSignal rocketSignal)
     {
-        EnableGameOver(rocketSignal.gameOverVersion);
+        StartCoroutine(WaitTwoSecond());
+    }
+    private IEnumerator WaitTwoSecond()
+    {
+        yield return new WaitForSeconds(2);
+        EnableGameOver(GameOverVersion.Rocket);
     }
     public void EnableGameOver(GameOverVersion version)
     {
