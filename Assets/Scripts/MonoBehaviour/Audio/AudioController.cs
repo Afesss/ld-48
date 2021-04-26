@@ -60,14 +60,26 @@ public class AudioController : MonoBehaviour
         float currentRate = ecology.GetCurrenMaxPollutionRate();
         if(currentRate > 0.3f)
         {
+            if(currentEcologyState == EcologyPollutionState.Medium)
+            {
+                return;
+            }
             currentEcologyState = EcologyPollutionState.Medium;
         }
         else if(currentRate > 0.6f)
         {
+            if (currentEcologyState == EcologyPollutionState.Hard)
+            {
+                return;
+            }
             currentEcologyState = EcologyPollutionState.Hard;
         }
         else
         {
+            if (currentEcologyState == EcologyPollutionState.Minimum)
+            {
+                return;
+            }
             currentEcologyState = EcologyPollutionState.Minimum;
         }
         ChangeGameAudioClip(currentEcologyState);
