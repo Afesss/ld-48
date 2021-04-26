@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee40e14927ec6e4bb8d0b499eb677af, type: 3}
   m_Name: EventFeast
   m_EditorClassIdentifier: 
-  title: "\u041F\u0440\u043E\u0432\u0435\u0441\u0442\u0438 \u0444\u0435\u0441\u0442\u0438\u0432\u0430\u043B\u044C"
+  title: "\u041F\u0440\u043E\u0432\u0435\u0441\u0442\u0438 \u0444\u0435\u0441\u0442\u0438\u0432\u0430\u043B\u044C
+    \u044D\u043A\u043E\u043B\u043E\u0433\u0438\u0438"
   type: 2
   isDisposable: 0
   satisfactionBonusRate: 0.1
