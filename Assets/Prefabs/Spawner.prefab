@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   truckWayPoints: {fileID: 286157313}
+  pool: {fileID: 0}
 --- !u!114 &286157313
 MonoBehaviour:
   m_ObjectHideFlags: 0
