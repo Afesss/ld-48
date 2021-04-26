@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Ecology
 {
+    public event Action<UIGameOver.GameOverVersion> OnPollutionExceeded;
     public delegate void EcologyAction(Type type);
-    public event EcologyAction OnPollutionExceeded;
     public event EcologyAction OnEcologyChange;
 
     private Settings settings;
@@ -48,7 +48,19 @@ public class Ecology
         OnEcologyChange?.Invoke(type);
         if (values[(int)type] > GetMaxValue(type))
         {
-            OnPollutionExceeded?.Invoke(type);
+            switch (type)
+            {
+                case Type.Air:
+                    OnPollutionExceeded?.Invoke(UIGameOver.GameOverVersion.Air);
+                    break;
+                case Type.Forest:
+                    OnPollutionExceeded?.Invoke(UIGameOver.GameOverVersion.Forest);
+                    break;
+                case Type.Water:
+                    OnPollutionExceeded?.Invoke(UIGameOver.GameOverVersion.Water);
+                    break;
+            }
+            // TODO: ”брать после отладки
             Debug.Log($"ƒостигнуто максимальное загр€знение по параметру {type}");
         }
     }

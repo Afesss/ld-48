@@ -45,31 +45,37 @@ MonoBehaviour:
   Dissatisfied:
     maxDissatified: 1000
   CarSpawner:
-    StartTimeToCarSpawn: 5
-    decreaseStepTimeToCarSpawn: 1
+    StartTimeToCarSpawn: 3
+    decreaseStepTimeToCarSpawn: 0.1
     minTimeToSpawnCar: 0.5
-    countCarToChangeTimeSpawn: 1
+    countCarToChangeTimeSpawn: 6
   Dump:
     maxStorageGarbageAmount: 1000
-    deliveredGarbageByOneTruck: 50
-    deliveredMoneyByOneTruck: 1000
+    deliveredGarbageByOneTruck: 150
+    deliveredMoneyByOneTruck: 200
+    sendTruckDelay: 1
   Rocket:
-    BuildPrice: 1000
-    LaunchPrice: 3000
+    BuildPrice: 4000
+    LaunchPrice: 8000
+  CityEvents:
+    Events:
+    - {fileID: 11400000, guid: 4a11b1d703d64b24caca371faa94e37a, type: 2}
+    - {fileID: 11400000, guid: 464f15b7638e8b0499a26a2c286666fd, type: 2}
+    - {fileID: 11400000, guid: e882dac4ecd31f74892377dd26a081a9, type: 2}
   Ecology:
     MaxAirValue: 1000
-    MaxForestValue: 1000
-    MaxWaterValue: 1000
+    MaxForestValue: 900
+    MaxWaterValue: 800
   Factory:
   - type: 0
     settings:
-      AirPollutionPerSecond: 5
+      AirPollutionPerSecond: 6
       ForestPollutionPerSecond: 0
       WaterPollutionPerSecond: 0
       StorageCapacity: 1500
       GarbageAmountDemand: 100
-      DissatisfiedAmountPerSecond: 10
-      BurnAmountPerTick: 10
+      DissatisfiedAmountPerSecond: 2.5
+      BurnAmountPerTick: 18
       BuildPrice: 300
       Upgrades:
       - {fileID: 11400000, guid: f6efb408c6fee46418f2a0c9ac0ba5db, type: 2}
@@ -77,26 +83,26 @@ MonoBehaviour:
   - type: 1
     settings:
       AirPollutionPerSecond: 3
-      ForestPollutionPerSecond: 5
+      ForestPollutionPerSecond: 7.5
       WaterPollutionPerSecond: 0
-      StorageCapacity: 2500
-      GarbageAmountDemand: 150
-      DissatisfiedAmountPerSecond: 15
-      BurnAmountPerTick: 15
-      BuildPrice: 1500
+      StorageCapacity: 2000
+      GarbageAmountDemand: 100
+      DissatisfiedAmountPerSecond: 3
+      BurnAmountPerTick: 26
+      BuildPrice: 1000
       Upgrades:
       - {fileID: 11400000, guid: b38e542fd93882c4fa1e10467eab5c7a, type: 2}
       - {fileID: 11400000, guid: cafaf2dc29decfa48aea3f90fadcf874, type: 2}
   - type: 2
     settings:
-      AirPollutionPerSecond: 1
-      ForestPollutionPerSecond: 3
-      WaterPollutionPerSecond: 5
-      StorageCapacity: 4000
-      GarbageAmountDemand: 200
-      DissatisfiedAmountPerSecond: 20
-      BurnAmountPerTick: 20
-      BuildPrice: 3000
+      AirPollutionPerSecond: 3
+      ForestPollutionPerSecond: 5
+      WaterPollutionPerSecond: 15
+      StorageCapacity: 2500
+      GarbageAmountDemand: 100
+      DissatisfiedAmountPerSecond: 4
+      BurnAmountPerTick: 32
+      BuildPrice: 2500
       Upgrades:
       - {fileID: 11400000, guid: e79a84ad5432f234d85673baabb89a1c, type: 2}
       - {fileID: 11400000, guid: 77a027c7088675b478667339cd93232d, type: 2}

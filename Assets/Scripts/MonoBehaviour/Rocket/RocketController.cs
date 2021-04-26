@@ -22,7 +22,7 @@ public class RocketController : MonoBehaviour, IBuildController
 
     public bool CanUpgrade { get { return false; } }
 
-    public bool CanInteract { get { return isBuilt; } }
+    public bool CanInteract { get { return isBuilt && !isLaunched; } }
 
     public int BuildPrice { get { return settings.BuildPrice; } }
     public int UpgradePrice { get { return 0; } }
@@ -36,6 +36,8 @@ public class RocketController : MonoBehaviour, IBuildController
     private Money money;
     private RocketSettings settings;
     private Dump dump;
+
+    private bool isLaunched = false;
 
     [Inject]
     private void Construct(SignalBus signalBus, Dump dump, Money money, RocketSettings settings)
@@ -54,7 +56,7 @@ public class RocketController : MonoBehaviour, IBuildController
 
     public void Build()
     {
-        if (money.SubtractMoney(settings.BuildPrice))
+        if (money.Spend(settings.BuildPrice))
         {
             isBuilt = true;
             rocketView.Build();
@@ -63,10 +65,11 @@ public class RocketController : MonoBehaviour, IBuildController
 
     public void Interact()
     {
-        if (money.SubtractMoney(settings.BuildPrice))
+        if (money.Spend(settings.LaunchPrice))
         {
             dump.SendGarbage(dump.CurrentStorageGarbage);
-            dump.SendTruck(spawnPoint, wayPoints);
+            dump.SendTruckDemand(spawnPoint, wayPoints, true);
+            isLaunched = true;
         }
     }
 

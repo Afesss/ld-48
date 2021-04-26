@@ -46,6 +46,12 @@ public class Dissatisfied
         }
         OnSatisfactionChange?.Invoke();
     }
+
+    internal void DecreaseByRate(float rate)
+    {
+        SubtractDissatisfied(settings.maxDissatified * rate);
+    }
+
     internal void CheckGameOver()
     {
         if(currentDissatisfied > settings.maxDissatified)

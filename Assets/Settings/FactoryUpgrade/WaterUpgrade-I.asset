@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WaterUpgrade-I
   m_EditorClassIdentifier: 
   airPollutionDecreaseAmount: 1
-  foresPollutionDecreaseAmount: 2
+  foresPollutionDecreaseAmount: 1
   waterPollutionDecreaseAmount: 3
-  upgradeCost: 1500
+  upgradeCost: 3000
