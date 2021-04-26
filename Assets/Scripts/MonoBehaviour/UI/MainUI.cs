@@ -51,8 +51,16 @@ public class MainUI : MonoBehaviour
     }
     private IEnumerator CameraHid()
     {
-        yield return new WaitForSeconds(0.1f);
-        menuCamera.SetActive(false);
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+            if (gameManager.SceneUnloaded)
+            {
+                menuCamera.SetActive(false);
+                gameManager.SceneUnloaded = false;
+                StopAllCoroutines();
+            }
+        }
     }
     public void Ñontinue()
     {
