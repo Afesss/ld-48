@@ -11,6 +11,7 @@ public class GameManager : IInitializable
     internal event Action<GameState> OnChangeAudio;
     internal event Action OnGameOver;
     internal event Action OnResumeGame;
+    private Ecology ecology;
     #region Enum
     private enum GameScene
     {
@@ -25,7 +26,10 @@ public class GameManager : IInitializable
         GAME_OVER
     }
     #endregion
-
+    public GameManager(Ecology ecology)
+    {
+        this.ecology = ecology;
+    }
     #region Variables
     internal GameState currentGameState { get; private set; }
     internal GameState previousGameState { get; private set; }
@@ -85,12 +89,14 @@ public class GameManager : IInitializable
     {
         if (currentGameState != GameState.RUNNING)
         {
+            ecology.ResetVuluesArray();
             if (currentGameState == GameState.PAUSE || currentGameState == GameState.GAME_OVER)
             {
                 UnloadScene(GameScene.GAME);
             }
             LoadScene(GameScene.GAME);
             UpdateGameState(GameState.RUNNING);
+            
         }
     }
     internal void OnGameOverInvoke()
