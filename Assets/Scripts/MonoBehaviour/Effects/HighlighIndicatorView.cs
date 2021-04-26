@@ -17,6 +17,11 @@ public class HighlighIndicatorView : MonoBehaviour
     [SerializeField]
     private Color hoveredColor;
 
+    [Tooltip("Курсор для состояния наведение на интерактивный объект")]
+    [SerializeField]
+    private Texture2D onOverCursor = default;
+
+
     private Color defaultColor;
 
     private void Awake()
@@ -30,6 +35,8 @@ public class HighlighIndicatorView : MonoBehaviour
     public void SetHover()
     {
         meshRenderer.material.color = hoveredColor;
+        if (onOverCursor != null)
+            Cursor.SetCursor(onOverCursor, Vector2.zero, CursorMode.Auto);
     }
 
     /// <summary>
@@ -46,5 +53,6 @@ public class HighlighIndicatorView : MonoBehaviour
     public void SetDefault()
     {
         meshRenderer.material.color = defaultColor;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 }
