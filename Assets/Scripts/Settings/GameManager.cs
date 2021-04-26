@@ -28,6 +28,7 @@ public class GameManager : IInitializable
     internal GameState currentGameState { get; private set; }
     internal GameState previousGameState { get; private set; }
     private List<AsyncOperation> loadOperations = new List<AsyncOperation>();
+    public bool SceneUnloaded { get; set; }
     #endregion
 
     #region Methods
@@ -45,7 +46,7 @@ public class GameManager : IInitializable
         }
 
         loadOperations.Add(operation);
-        operation.completed += Operation_completed;
+        operation.completed += LoadOperation_completed;
     }
     private void UnloadScene(GameScene gameScene)
     {
@@ -57,9 +58,17 @@ public class GameManager : IInitializable
         }
 
         loadOperations.Add(operation);
-        operation.completed += Operation_completed;
+        operation.completed += LoadOperation_completed;
     }
-    private void Operation_completed(AsyncOperation operation)
+    private void UnloadOperation_completed(AsyncOperation operation)
+    {
+        if (loadOperations.Contains(operation))
+        {
+            loadOperations.Remove(operation);
+            SceneUnloaded = true;
+        }
+    }
+    private void LoadOperation_completed(AsyncOperation operation)
     {
         if (loadOperations.Contains(operation))
         {
