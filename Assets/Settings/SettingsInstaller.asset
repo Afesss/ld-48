@@ -60,8 +60,8 @@ MonoBehaviour:
   CityEvents:
     Events:
     - {fileID: 11400000, guid: 4a11b1d703d64b24caca371faa94e37a, type: 2}
-    - {fileID: 11400000, guid: 464f15b7638e8b0499a26a2c286666fd, type: 2}
     - {fileID: 11400000, guid: e882dac4ecd31f74892377dd26a081a9, type: 2}
+    - {fileID: 11400000, guid: 464f15b7638e8b0499a26a2c286666fd, type: 2}
   Ecology:
     MaxAirValue: 1000
     MaxForestValue: 900
