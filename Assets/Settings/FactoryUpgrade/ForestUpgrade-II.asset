@@ -15,4 +15,4 @@ MonoBehaviour:
   airPollutionDecreaseAmount: 1
   foresPollutionDecreaseAmount: 3
   waterPollutionDecreaseAmount: 0
-  upgradeCost: 1500
+  upgradeCost: 1600
