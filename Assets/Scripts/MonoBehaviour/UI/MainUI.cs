@@ -32,7 +32,7 @@ public class MainUI : MonoBehaviour
     {
         epilouge.SetActive(false);
         tutorial.SetActive(false);
-        gameManager.OnGameOver += Pause;
+        gameManager.OnMainMenu += Pause;
     }
     private void Update()
     {
@@ -89,7 +89,7 @@ public class MainUI : MonoBehaviour
     }
     public void Exit()
     {
-        gameManager.OnGameOver -= Pause;
+        gameManager.OnMainMenu -= Pause;
         Application.Quit();
     }
     public void ShowTutorial()
