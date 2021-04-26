@@ -70,9 +70,12 @@ public class UICityEventsView : MonoBehaviour
 
     private void ClearList()
     {
-        foreach (var element in poolElements)
-            element.ReturnToPool();
-        poolElements.Clear();
+        if (poolElements != null)
+        {
+            foreach (var element in poolElements)
+                element.ReturnToPool();
+            poolElements.Clear();
+        }
     }
 
     public void Close()

@@ -20,12 +20,12 @@ public class UICityEventsController : MonoBehaviour
     private void Awake()
     {
         if (view != null)
-        {
-            view.RedrawList(cityEvents.GetList());
             view.OnCityEventSelect += OnCityEventSelect;
-        }
+    }
 
-        
+    private void Start()
+    {
+        view.RedrawList(cityEvents.GetList());
     }
 
     private void OnCityEventSelect(int index)
