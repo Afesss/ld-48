@@ -5,6 +5,10 @@ using Zenject;
 [CreateAssetMenu(fileName = "SettingsInstaller", menuName = "Installers/SettingsInstaller")]
 public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 {
+    [Header("Настройка материалов города")]
+    public FactoryMaterialsHandler.Settings CityMaterials;
+    [Header("Настройки аудио")]
+    public AudioSettings Audio;
     [Header("Image UI Game Over")]
     public UIGameOver.Settings UIGameOver;
     [Header("Настройки пула грузовиков")]
@@ -47,6 +51,8 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
         Container.BindInstance(Rocket);
         Container.BindInstance(TruckPool);
         Container.BindInstance(UIGameOver);
+        Container.BindInstance(Audio);
+        Container.BindInstance(CityMaterials);
 //        Container.BindInstance(Timer);
 //        Container.BindInstance(UI.Task);
 //        Container.BindInstance(UI.TaskList);

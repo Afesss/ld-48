@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65942e415c910240963a5b8770c9570, type: 3}
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
+  CityMaterials:
+    factoryWall: {fileID: 2100000, guid: 46d555f6dda8149469744a058e895827, type: 2}
+    minFacotryWallColor: {r: 0.4901961, g: 0.43137258, b: 0.38823533, a: 0}
+    midFactoryWallColor: {r: 0, g: 0, b: 0, a: 0}
+    hardFactoryWallColor: {r: 0, g: 0, b: 0, a: 0}
+    factoryRoof: {fileID: 2100000, guid: 442910e3330f7804b8d69500a14f6078, type: 2}
+    minFactoryRoofColor: {r: 0.4666667, g: 0.4039216, b: 0.26666668, a: 0}
+    midFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
+    hardFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
+  Audio:
+    mainMenu: {fileID: 8300000, guid: f9a9dc8b57f048b43b0586000d357142, type: 3}
+    easyGame: {fileID: 8300000, guid: 638b915c4e264f549bd8b07cae082cc5, type: 3}
+    mediumGame: {fileID: 0}
+    hardGame: {fileID: 0}
+    gameOver: {fileID: 0}
+    truckWheels: {fileID: 0}
+    construction: {fileID: 0}
+    click: {fileID: 0}
   UIGameOver:
     dumpGameOver: {fileID: 0}
     airGameOver: {fileID: 0}
@@ -20,7 +38,7 @@ MonoBehaviour:
     rocketGameOver: {fileID: 0}
     dissatisfiedGameOver: {fileID: 0}
   TruckPool:
-    turckPrefab: {fileID: 5803330403083096111, guid: 5bb6122434c70d94fad95fcc8f72ab53, type: 3}
+    turckPrefab: {fileID: 4916074292160397900, guid: 60807665b09c95a478f5ec772d6c5429, type: 3}
     poolTruckCount: 20
   Money:
     startAmount: 0
