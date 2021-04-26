@@ -88,10 +88,15 @@ public class FactoryController : MonoBehaviour, IBuildController
 
     public void Interact()
     {
-        if (dump.SendGarbage(factory.Settings.GarbageAmountDemand))
+        if (dump.CurrentStorageGarbage > factory.Settings.GarbageAmountDemand && 
+            factory.AddGarbageToReserve(factory.Settings.GarbageAmountDemand))
         {
-            if (factory.GetFreeStorageSpace() > factory.Settings.GarbageAmountDemand)
-                dump.SendTruck(spawnPoint, wayPoints);
+            if (dump.SendGarbage(factory.Settings.GarbageAmountDemand))
+                dump.SendTruckDemand(spawnPoint, wayPoints, true);
+        }
+        else
+        {
+            signalBus.Fire(new NotEnoughGarbageSpaceSignal());
         }
     }
 

@@ -19,11 +19,8 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     public Dump.Settings Dump;
     [Header("Настройки ракеты")]
     public RocketSettings Rocket;
-    //[Header("Настройки таймера")]
-    //public SomeService.Settings Timer;
-
-    //[Header("Настройки интерфейса")]
-    //public UISettings UI;
+    [Header("Настройки городских событий")]
+    public CityEvents.Settings CityEvents;
 
     [Header("Настройки экологии")]
     public Ecology.Settings Ecology;
@@ -31,15 +28,15 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
     [Header("Настройки заводов")]
     public FactorySet[] Factory;
 
-    [Serializable]
-    public struct UISettings
-    {
+    //[Serializable]
+    //public struct UISettings
+    //{
         //[Tooltip("Настройки отображения задачи")]
         //public UITaskView.Settings Task;
 
         //[Tooltip("Настройки отображения списка задач")]
         //public UITaskListView.Settings TaskList;
-    }
+    //}
 
     public override void InstallBindings()
     {
@@ -55,5 +52,6 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 //        Container.BindInstance(UI.TaskList);
         Container.BindInstance(Ecology);
         Container.BindInstance(Factory);
+        Container.BindInstance(CityEvents);
     }
 }

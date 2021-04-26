@@ -20,6 +20,7 @@ public class Factory
     private float currentForestPollutionPerSecond = 0;
     private float currentWaterPollutionPerSecond = 0;
     private float currentStorageAmount = 0;
+    private float currentStorageReserve = 0;
 
     public Factory(Type type, FactorySet[] settings, Money money, Dissatisfied dissatisfied, Ecology ecology)
     {
@@ -28,6 +29,8 @@ public class Factory
         this.dissatisfied = dissatisfied;
         this.ecology = ecology;
         this.type = type;
+
+        currentStorageReserve = this.settings.StorageCapacity;
 
         currentAirPollutionPerSecond = this.settings.AirPollutionPerSecond;
         currentForestPollutionPerSecond = this.settings.ForestPollutionPerSecond;
@@ -56,6 +59,22 @@ public class Factory
     public float GetStorageSpaceRate()
     {
         return currentStorageAmount / settings.StorageCapacity;
+    }
+
+    /// <summary>
+    /// Пытаемся зарезервировать место под мусор
+    /// </summary>
+    /// <param name="amount">Количество мусора</param>
+    /// <returns>Получилось ли зарезервировать место</returns>
+    public bool AddGarbageToReserve(float amount)
+    {
+        Debug.Log($"{amount} > {currentStorageReserve}  ##({GetFreeStorageSpace()})");
+        if (amount > currentStorageReserve)
+            return false;
+
+        currentStorageReserve -= amount;
+
+        return true;
     }
 
     /// <summary>
@@ -102,7 +121,7 @@ public class Factory
         {
             var upgradeSettings = settings.Upgrades[currentUpgrade];
 
-            if (money.SubtractMoney(upgradeSettings.UpgradeCost))
+            if (money.Spend(upgradeSettings.UpgradeCost))
             {
                 currentAirPollutionPerSecond = upgradeSettings.AirPollutionDecreaseAmount;
                 currentForestPollutionPerSecond = upgradeSettings.ForesPollutionDecreaseAmount;
@@ -118,7 +137,7 @@ public class Factory
 
     public bool DoBuild()
     {
-        if (money.SubtractMoney(settings.BuildPrice))
+        if (money.Spend(settings.BuildPrice))
             return true;
         return false;
     }
@@ -151,7 +170,9 @@ public class Factory
     {
         if (isBurning)
         {
-            currentStorageAmount -= settings.BurnAmountPerTick * Time.deltaTime;
+            var burned = settings.BurnAmountPerTick * Time.deltaTime;
+            currentStorageAmount -= burned;
+            currentStorageReserve += burned;
             if (currentStorageAmount < 0)
                 StopBurn();
             IncreasePollution();

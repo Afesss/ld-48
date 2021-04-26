@@ -54,7 +54,7 @@ public class RocketController : MonoBehaviour, IBuildController
 
     public void Build()
     {
-        if (money.SubtractMoney(settings.BuildPrice))
+        if (money.Spend(settings.BuildPrice))
         {
             isBuilt = true;
             rocketView.Build();
@@ -63,10 +63,10 @@ public class RocketController : MonoBehaviour, IBuildController
 
     public void Interact()
     {
-        if (money.SubtractMoney(settings.BuildPrice))
+        if (money.Spend(settings.BuildPrice))
         {
             dump.SendGarbage(dump.CurrentStorageGarbage);
-            dump.SendTruck(spawnPoint, wayPoints);
+            dump.SendTruckDemand(spawnPoint, wayPoints, true);
         }
     }
 
