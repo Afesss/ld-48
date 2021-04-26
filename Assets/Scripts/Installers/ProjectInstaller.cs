@@ -7,10 +7,10 @@ public class ProjectInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
         
-        
         SignalBusInstaller.Install(Container);
         Container.DeclareSignal<AudioSignal>();
         Container.DeclareSignal<MainMenuSignal>();
-        
+
+        Container.BindInterfacesAndSelfTo<Ecology>().AsSingle();
     }
 }

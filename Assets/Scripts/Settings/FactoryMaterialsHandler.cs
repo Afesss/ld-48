@@ -23,7 +23,6 @@ public class FactoryMaterialsHandler : IInitializable
     }
     private void ResetFactoryColor()
     {
-
         ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
     }
     public void UnsubscribeEcologyEvent()

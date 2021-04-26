@@ -12,17 +12,20 @@ public class AudioController : MonoBehaviour
 
     private float truckVolume = 0.1f;
 
+    private EcologyPollutionState currentEcologyState;
     private AudioClip currentGameAudioClip;
     private AudioSettings audioSettings;
     private GameManager gameManager;
     private SignalBus signalBus;
-
+    private Ecology ecology;
     [Inject]
-    private void Construct(AudioSettings audioSettings,GameManager gameManager, SignalBus signalBus)
+    private void Construct(AudioSettings audioSettings,GameManager gameManager, SignalBus signalBus,
+        Ecology ecology)
     {
         this.audioSettings = audioSettings;
         this.gameManager = gameManager;
         this.signalBus = signalBus;
+        this.ecology = ecology;
     }
     private void Awake()
     {
@@ -49,10 +52,31 @@ public class AudioController : MonoBehaviour
         currentGameAudioClip = audioSettings.easyGame;
 
         signalBus.Subscribe<AudioSignal>(PlayConstructAudio);
+        ecology.OnEcologyChange += Ecology_OnEcologyChange;
     }
+    
+    private void Ecology_OnEcologyChange(Ecology.Type type)
+    {
+        float currentRate = ecology.GetCurrenMaxPollutionRate();
+        if(currentRate > 0.3f)
+        {
+            currentEcologyState = EcologyPollutionState.Medium;
+        }
+        else if(currentRate > 0.6f)
+        {
+            currentEcologyState = EcologyPollutionState.Hard;
+        }
+        else
+        {
+            currentEcologyState = EcologyPollutionState.Minimum;
+        }
+        ChangeGameAudioClip(currentEcologyState);
+    }
+
     private void OnDestroy()
     {
         signalBus.Unsubscribe<AudioSignal>(PlayConstructAudio);
+        ecology.OnEcologyChange -= Ecology_OnEcologyChange;
     }
     private void Start()
     {
