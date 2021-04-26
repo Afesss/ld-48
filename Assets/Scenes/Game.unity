@@ -1098,10 +1098,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RocketPlatform
       objectReference: {fileID: 0}
-    - target: {fileID: 3739118867305697425, guid: f840f81228c5ac04d83c36400bc96669, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3739118867305697426, guid: f840f81228c5ac04d83c36400bc96669, type: 3}
       propertyPath: dirtyRain
       value: 

@@ -72,6 +72,7 @@ public class FactoryController : MonoBehaviour, IBuildController
     {
         if (factory.DoBuild())
         {
+            signalBus.Fire(new AudioSignal());
             factoryUpgradeLevel = 1;
             factoryView.Upgrade();
         }
@@ -81,6 +82,7 @@ public class FactoryController : MonoBehaviour, IBuildController
     {
         if (factory.DoUpgrade())
         {
+            signalBus.Fire(new AudioSignal());
             factoryUpgradeLevel++;
             factoryView.Upgrade();
         }
