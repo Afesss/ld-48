@@ -53,9 +53,15 @@ MonoBehaviour:
     maxStorageGarbageAmount: 1000
     deliveredGarbageByOneTruck: 50
     deliveredMoneyByOneTruck: 1000
+    sendTruckDelay: 1
   Rocket:
     BuildPrice: 1000
     LaunchPrice: 3000
+  CityEvents:
+    Events:
+    - {fileID: 11400000, guid: 4a11b1d703d64b24caca371faa94e37a, type: 2}
+    - {fileID: 11400000, guid: 464f15b7638e8b0499a26a2c286666fd, type: 2}
+    - {fileID: 11400000, guid: e882dac4ecd31f74892377dd26a081a9, type: 2}
   Ecology:
     MaxAirValue: 1000
     MaxForestValue: 1000
