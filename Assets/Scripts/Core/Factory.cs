@@ -68,7 +68,6 @@ public class Factory
     /// <returns>Получилось ли зарезервировать место</returns>
     public bool AddGarbageToReserve(float amount)
     {
-        Debug.Log($"{amount} > {currentStorageReserve}  ##({GetFreeStorageSpace()})");
         if (amount > currentStorageReserve)
             return false;
 
