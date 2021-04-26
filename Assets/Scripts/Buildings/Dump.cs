@@ -1,10 +1,9 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using Zenject;
 
-public class Dump
+public class Dump: ITickable
 {
     internal event Action<UIGameOver.GameOverVersion> DumpGameOver;
     internal event Action OnGarbageAmountUpdate;
@@ -16,6 +15,11 @@ public class Dump
     private Settings settings;
     private TruckPool truckPool;
     private Money money;
+
+    //private int carQueue = 0;
+    private float currentDelayCountdoun = 0;
+    private Queue<TruckRoute> routeQueue;
+
     #endregion
 
     #region Construct
@@ -24,6 +28,8 @@ public class Dump
         this.truckPool = truckPool;
         this.settings = settings;
         this.money = money;
+
+        routeQueue = new Queue<TruckRoute>();
     }
     #endregion
 
@@ -52,16 +58,47 @@ public class Dump
         }
         return false;
     }
-    public void SendTruck(Transform spawnPoint, Transform[] moveWayPoints)
+
+    public void SendTruckDemand(Transform spawnPoint, Transform[] moveWayPoints, bool withQueue = false)
     {
         var truckRoute = new TruckRoute(spawnPoint, moveWayPoints);
+
+        if (withQueue)
+        {
+            routeQueue.Enqueue(truckRoute);
+            currentDelayCountdoun += settings.sendTruckDelay;
+        }
+        else
+        {
+            SendTrackProcess(truckRoute);
+        }
+    }
+
+    public void Tick()
+    {
+        if (currentDelayCountdoun > 0)
+        {
+            if (currentDelayCountdoun < routeQueue.Count * settings.sendTruckDelay)
+                SendTrackProcess(routeQueue.Dequeue());
+
+            currentDelayCountdoun -= Time.deltaTime;
+
+            if (currentDelayCountdoun < 0)
+                currentDelayCountdoun = 0;
+        }
+    }
+
+    private void SendTrackProcess(TruckRoute truckRoute)
+    {
         TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
         car.SetPath(truckRoute);
     }
+
     internal float GetGarbageAmountRate()
     {
         return currentStorageGarbage / settings.maxStorageGarbageAmount;
     }
+
     #endregion
 
     #region Struct
@@ -74,6 +111,8 @@ public class Dump
         public float deliveredGarbageByOneTruck;
         [Tooltip("Количество доставляемых денег одним грузовиком")]
         public int deliveredMoneyByOneTruck;
+        [Tooltip("Время задержки перед отправлением грузовика со склада")]
+        public float sendTruckDelay;
     }
     #endregion
 }

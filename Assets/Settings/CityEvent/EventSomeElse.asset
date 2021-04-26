@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4857526047f073f4984008f460a0f1d6, type: 3}
-  m_Name: ForestUpgrade-II
+  m_Script: {fileID: 11500000, guid: 3ee40e14927ec6e4bb8d0b499eb677af, type: 3}
+  m_Name: EventSomeElse
   m_EditorClassIdentifier: 
-  airPollutionDecreaseAmount: 1
-  foresPollutionDecreaseAmount: 3
-  waterPollutionDecreaseAmount: 0
-  upgradeCost: 1600
+  title: "\u041A\u0443\u043F\u0438\u0442\u044C \u0438\u043D\u0434\u0443\u043B\u044C\u0433\u0435\u043D\u0446\u0438\u044E"
+  type: 0
+  isDisposable: 0
+  satisfactionBonusRate: 0.25
+  price: 2000

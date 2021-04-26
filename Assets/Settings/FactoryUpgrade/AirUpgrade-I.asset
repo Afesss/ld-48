@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4857526047f073f4984008f460a0f1d6, type: 3}
   m_Name: AirUpgrade-I
   m_EditorClassIdentifier: 
-  airPollutionDecreaseAmount: 1
+  airPollutionDecreaseAmount: 2
   foresPollutionDecreaseAmount: 0
   waterPollutionDecreaseAmount: 0
   upgradeCost: 500
