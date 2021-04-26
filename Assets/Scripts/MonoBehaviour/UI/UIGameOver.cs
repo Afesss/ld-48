@@ -7,11 +7,15 @@ public class UIGameOver : MonoBehaviour
 {
     [SerializeField] private Image gameOverImage;
     [SerializeField] private GameObject gameOverMenu;
-
+    private Sprite currentSprite;
     private Settings settings;
     private GameManager gameManager;
-    private Sprite currentSprite;
 
+    private Dump dump;
+    private Ecology ecology;
+    private Dissatisfied dissatisfied;
+    private SignalBus signalBus;
+    private FactoryMaterialsHandler factoryMaterials;
     public enum GameOverVersion
     {
         Dump,
@@ -23,16 +27,42 @@ public class UIGameOver : MonoBehaviour
     }
 
     [Inject]
-    public void Constuct(Settings settings, GameManager gameManager)
+    public void Constuct(Settings settings, GameManager gameManager,Dump dump,Ecology ecology,
+        Dissatisfied dissatisfied,SignalBus signalBus, FactoryMaterialsHandler factoryMaterials)
     {
         this.settings = settings;
         this.gameManager = gameManager;
+
+        this.factoryMaterials = factoryMaterials;
+
+        this.dump = dump;
+        this.ecology = ecology;
+        this.dissatisfied = dissatisfied;
+        this.signalBus = signalBus;
     }
     private void Start()
     {
         gameOverMenu.SetActive(false);
+
+        dump.DumpGameOver += EnableGameOver;
+        ecology.OnPollutionExceeded += EnableGameOver;
+        dissatisfied.DissatisfiedGameOver += EnableGameOver;
+
+        signalBus.Subscribe<RocketSignal>(EnableGameOver);
     }
-    public void EnableGameOvetr(GameOverVersion version)
+   
+    private void OnDestroy()
+    {
+        dump.DumpGameOver -= EnableGameOver;
+        ecology.OnPollutionExceeded -= EnableGameOver;
+        dissatisfied.DissatisfiedGameOver -= EnableGameOver;
+        signalBus.Unsubscribe<RocketSignal>(EnableGameOver);
+    }
+    private void EnableGameOver(RocketSignal rocketSignal)
+    {
+        EnableGameOver(rocketSignal.gameOverVersion);
+    }
+    public void EnableGameOver(GameOverVersion version)
     {
         switch (version)
         {
@@ -63,6 +93,7 @@ public class UIGameOver : MonoBehaviour
     }
     public void ReturnToMainMenu()
     {
+        factoryMaterials.ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
         gameOverMenu.SetActive(false);
         gameManager.OnGameOverInvoke();
         

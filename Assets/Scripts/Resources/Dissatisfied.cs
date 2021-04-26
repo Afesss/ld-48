@@ -6,7 +6,7 @@ using Zenject;
 
 public class Dissatisfied
 {
-    internal event Action DissatisfiedGameOver;
+    internal event Action<UIGameOver.GameOverVersion> DissatisfiedGameOver;
     internal event Action OnSatisfactionChange;
 
     #region Variables
@@ -56,7 +56,7 @@ public class Dissatisfied
     {
         if(currentDissatisfied > settings.maxDissatified)
         {
-            DissatisfiedGameOver?.Invoke();
+            DissatisfiedGameOver?.Invoke(UIGameOver.GameOverVersion.Dissatisfied);
         }
     }
     #endregion

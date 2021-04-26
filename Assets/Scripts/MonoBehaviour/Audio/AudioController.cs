@@ -10,13 +10,15 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioSource truckAudioSource;
     [SerializeField] private AudioSource constructAudioSource;
 
+    private float truckVolume = 0.1f;
+
     private AudioClip currentGameAudioClip;
     private AudioSettings audioSettings;
     private GameManager gameManager;
     private SignalBus signalBus;
 
     [Inject]
-    private void Construct(AudioSettings audioSettings,GameManager gameManager,SignalBus signalBus)
+    private void Construct(AudioSettings audioSettings,GameManager gameManager, SignalBus signalBus)
     {
         this.audioSettings = audioSettings;
         this.gameManager = gameManager;
@@ -25,13 +27,14 @@ public class AudioController : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        gameManager.OnChangeAudio += ChangeBackgroundAudio;
+        
         mouseAudioSource.playOnAwake = false;
         mouseAudioSource.loop = false;
         mouseAudioSource.clip = audioSettings.click;
 
         truckAudioSource.playOnAwake = false;
         truckAudioSource.loop = true;
+        truckAudioSource.volume = truckVolume;
         truckAudioSource.clip = audioSettings.truckWheels;
 
         constructAudioSource.playOnAwake = false;
@@ -46,6 +49,14 @@ public class AudioController : MonoBehaviour
         currentGameAudioClip = audioSettings.easyGame;
 
         signalBus.Subscribe<AudioSignal>(PlayConstructAudio);
+    }
+    private void OnDestroy()
+    {
+        signalBus.Unsubscribe<AudioSignal>(PlayConstructAudio);
+    }
+    private void Start()
+    {
+        gameManager.OnChangeAudio += ChangeBackgroundAudio;
     }
     private void PlayConstructAudio()
     {
@@ -87,9 +98,12 @@ public class AudioController : MonoBehaviour
         backgroundAudioSource.clip = currentGameAudioClip;
         backgroundAudioSource.Play();
     }
-    private void OnMouseDown()
+    private void Update()
     {
-        mouseAudioSource.Play();
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            mouseAudioSource.Play();
+        }
     }
     private void OnDisable()
     {

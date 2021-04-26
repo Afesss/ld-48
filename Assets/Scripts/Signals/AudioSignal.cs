@@ -1,3 +1,1 @@
-using UnityEngine;
-
-public class AudioSignal { }
+public class AudioSignal{}

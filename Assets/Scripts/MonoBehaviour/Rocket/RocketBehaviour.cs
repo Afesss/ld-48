@@ -8,7 +8,8 @@ public class RocketBehaviour : MonoBehaviour
 {
     #region Variables
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip audioClip;
+    [SerializeField] private AudioClip flyClip;
+    [SerializeField] private AudioClip explosionRocketClip;
     [SerializeField] private Animation platformAnim;
     [SerializeField] private Animation rocketAnim;
     [SerializeField] private Transform rocket;
@@ -19,9 +20,13 @@ public class RocketBehaviour : MonoBehaviour
     [SerializeField] private AnimationCurve curve;
 
     private float startYPosition;
+    private SignalBus signalBus;
     #endregion
-
-
+    [Inject]
+    private void Construct(SignalBus signalBus)
+    {
+        this.signalBus = signalBus;
+    }
     #region Methods
     private void Awake()
     {
@@ -35,18 +40,10 @@ public class RocketBehaviour : MonoBehaviour
     {
         StartCoroutine(RocetStart());
     }
-    //TODO: Delete when added UI.
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RocketLauncher();
-        }
-    }
     public void RocketLauncher()
     {
         startYPosition = rocket.position.y;
-        audioSource.clip = audioClip;
+        audioSource.clip = flyClip;
         audioSource.Play();
         StartCoroutine(WaitSecondToStartRocket());
     }
@@ -65,9 +62,14 @@ public class RocketBehaviour : MonoBehaviour
             if (rocket.transform.position.y > explodePosition)
             {
                 StopAllCoroutines();
+                audioSource.Stop();
+                audioSource.clip = explosionRocketClip;
+                audioSource.Play();
                 explosion.Play();
                 dirtyRain.Play();
                 Destroy(rocket.gameObject);
+
+                signalBus.Fire(new RocketSignal() { gameOverVersion = UIGameOver.GameOverVersion.Rocket });
             }
         }
     }

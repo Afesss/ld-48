@@ -230,7 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 8404398864444364562}
-  audioClip: {fileID: 0}
+  flyClip: {fileID: 8300000, guid: f6957da3f29f853459682e1eb454849d, type: 3}
+  explosionRocketClip: {fileID: 8300000, guid: fc629d3b31597e741b7876a2bc30b9ad, type: 3}
   platformAnim: {fileID: 4550162969895865804}
   rocketAnim: {fileID: 8392308002179058112}
   rocket: {fileID: 1367393831570882718}
