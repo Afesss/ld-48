@@ -11,6 +11,7 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject menuCamera;
     [SerializeField] private GameObject mainEventSystem;
+    [SerializeField] private ParticleSystem rain;
     
     private GameManager gameManager;
     #endregion
@@ -26,7 +27,7 @@ public class MainUI : MonoBehaviour
     #region Methods
     protected void Awake()
     {
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         gameManager.OnGameOver += Pause;
     }
     private void Update()
@@ -63,6 +64,7 @@ public class MainUI : MonoBehaviour
     }
     internal void Pause()
     {
+        rain.Play();
         StopAllCoroutines();
         menuCamera.SetActive(true);
         mainMenu.SetActive(true);

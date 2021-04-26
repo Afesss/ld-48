@@ -22,10 +22,10 @@ MonoBehaviour:
     midFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
     hardFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
   Audio:
-    mainMenu: {fileID: 0}
-    easyGame: {fileID: 0}
-    mediumGame: {fileID: 0}
-    hardGame: {fileID: 0}
+    mainMenu: {fileID: 8300000, guid: ed7598cd00d1d3d42868750dcd06cdcc, type: 3}
+    easyGame: {fileID: 8300000, guid: c61dd6de45ffbe44488f802cdbbe3c1e, type: 3}
+    mediumGame: {fileID: 8300000, guid: ff099e148080afb428718e2e10782dcc, type: 3}
+    hardGame: {fileID: 8300000, guid: 4ed5218d9c566f447984a839dc734d3d, type: 3}
     gameOver: {fileID: 0}
     truckWheels: {fileID: 0}
     construction: {fileID: 0}
