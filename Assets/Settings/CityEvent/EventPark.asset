@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee40e14927ec6e4bb8d0b499eb677af, type: 3}
   m_Name: EventPark
   m_EditorClassIdentifier: 
-  title: "\u041F\u043E\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u043F\u0430\u0440\u043A"
+  title: Build a park
   type: 1
   isDisposable: 1
   satisfactionBonusRate: 0.5

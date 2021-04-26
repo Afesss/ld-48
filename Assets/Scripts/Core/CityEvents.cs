@@ -26,7 +26,6 @@ public class CityEvents
     public bool Apply(int index)
     {
         var set = Get(index);
-        Debug.Log($"Try to do city event: {set.Title}");
         if (money.Spend(set.Price))
         {
             dissatisfied.DecreaseByRate(set.SatisfactionBonusRate);
