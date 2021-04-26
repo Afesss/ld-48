@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6932101973851982409}
   - component: {fileID: 6932101973851982408}
   - component: {fileID: 6932101973851982411}
+  - component: {fileID: 1025332476967576584}
   m_Layer: 0
   m_Name: Fireworks
   m_TagString: Untagged
@@ -4862,3 +4863,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1025332476967576584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932101973851982410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6e4a629069a274894eae3b5afe609b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 6932101973851982408}
