@@ -35,10 +35,7 @@ public class TruckSpawner : MonoBehaviour
     }
     private IEnumerator CarsSpawner()
     {
-        TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
-        car.SetPath(new TruckRoute(truckWayPoints.SpawnPoint,truckWayPoints.WayPoints));
-
-        currentSpawnCarAmount++;
+        
         if(currentSpawnCarAmount > settings.countCarToChangeTimeSpawn)
         {
             if (timeToSpawnCar <= settings.minTimeToSpawnCar)
@@ -51,6 +48,11 @@ public class TruckSpawner : MonoBehaviour
             }
             currentSpawnCarAmount = 0;
         }
+
+        TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
+        car.SetPath(new TruckRoute(truckWayPoints.SpawnPoint, truckWayPoints.WayPoints));
+
+        currentSpawnCarAmount++;
         yield return new WaitForSeconds(timeToSpawnCar);
 
         StartCoroutine(CarsSpawner());
