@@ -102,7 +102,9 @@ public class UIGameOver : MonoBehaviour
     {
         factoryMaterials.ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
         gameOverMenu.SetActive(false);
+        AudioEventBroker.OnResetAudioInvoke();
         gameManager.OnGameOverInvoke();
+        
     }
     [Serializable]
     public struct Settings

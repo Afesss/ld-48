@@ -34,6 +34,7 @@ public class MainUI : MonoBehaviour
         tutorial.SetActive(false);
         gameManager.OnMainMenu += Pause;
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) &&
