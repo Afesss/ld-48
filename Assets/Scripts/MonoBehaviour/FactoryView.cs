@@ -5,6 +5,9 @@ using UnityEngine;
 public class FactoryView : MonoBehaviour
 {
     [SerializeField]
+    private GameObject prepareParts;
+
+    [SerializeField]
     private GameObject[] factoryParts;
 
     [SerializeField]
@@ -24,7 +27,11 @@ public class FactoryView : MonoBehaviour
     public void Upgrade()
     {
         if (nextLevel == 0)
+        {
             storageView.gameObject.SetActive(true);
+            if (prepareParts != null)
+                prepareParts.SetActive(false);
+        }
 
         if (nextLevel < factoryParts.Length)
         {
