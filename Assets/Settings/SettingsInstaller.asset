@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CityMaterials:
     factoryWall: {fileID: 2100000, guid: 46d555f6dda8149469744a058e895827, type: 2}
-    minFacotryWallColor: {r: 0.4901961, g: 0.43137258, b: 0.38823533, a: 0}
-    midFactoryWallColor: {r: 0, g: 0, b: 0, a: 0}
+    minFacotryWallColor: {r: 0.8235295, g: 0.7960785, b: 0.75294125, a: 0}
+    midFactoryWallColor: {r: 0.2509804, g: 0.30980393, b: 0.10980393, a: 0}
     hardFactoryWallColor: {r: 0, g: 0, b: 0, a: 0}
     factoryRoof: {fileID: 2100000, guid: 442910e3330f7804b8d69500a14f6078, type: 2}
-    minFactoryRoofColor: {r: 0.4666667, g: 0.4039216, b: 0.26666668, a: 0}
-    midFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
+    minFactoryRoofColor: {r: 0.5686275, g: 0.49411768, b: 0.42352945, a: 0}
+    midFactoryRoofColor: {r: 0.29411766, g: 0.21176472, b: 0.18431373, a: 0}
     hardFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
   Audio:
     mainMenu: {fileID: 8300000, guid: ed7598cd00d1d3d42868750dcd06cdcc, type: 3}
