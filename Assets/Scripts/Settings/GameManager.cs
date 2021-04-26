@@ -8,6 +8,7 @@ using Zenject;
 public class GameManager : IInitializable
 {
     internal event Action OnGameOver;
+    internal event Action<GameState> OnChangeAudio;
     #region Enum
     private enum GameScene
     {
@@ -25,6 +26,7 @@ public class GameManager : IInitializable
 
     #region Variables
     internal GameState currentGameState { get; private set; }
+    internal GameState previousGameState { get; private set; }
     private List<AsyncOperation> loadOperations = new List<AsyncOperation>();
     #endregion
 
@@ -84,6 +86,7 @@ public class GameManager : IInitializable
     }
     internal void UpdateGameState(GameState gameState)
     {
+        previousGameState = currentGameState;
         switch (gameState)
         {
             case GameState.PREGAME:
@@ -98,6 +101,7 @@ public class GameManager : IInitializable
                 break;
         }
         currentGameState = gameState;
+        OnChangeAudio?.Invoke(currentGameState);
     }
     #endregion
 }

@@ -11,6 +11,7 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject menuCamera;
     [SerializeField] private GameObject mainEventSystem;
+    
     private GameManager gameManager;
     #endregion
 
@@ -30,9 +31,11 @@ public class MainUI : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && 
+        if (Input.GetKeyDown(KeyCode.Escape) &&
             gameManager.currentGameState != GameManager.GameState.GAME_OVER)
+        {
             Pause();
+        }
     }
     
     public void NewGame()
@@ -51,7 +54,7 @@ public class MainUI : MonoBehaviour
     public void Ñontinue()
     {
         if (gameManager.currentGameState == GameManager.GameState.PAUSE && 
-            gameManager.currentGameState != GameManager.GameState.GAME_OVER)
+            gameManager.previousGameState != GameManager.GameState.GAME_OVER)
         {
             gameManager.UpdateGameState(GameManager.GameState.RUNNING);
             mainMenu.SetActive(false);
@@ -63,10 +66,7 @@ public class MainUI : MonoBehaviour
         StopAllCoroutines();
         menuCamera.SetActive(true);
         mainMenu.SetActive(true);
-        if (gameManager.currentGameState != GameManager.GameState.GAME_OVER)
-        {
-            gameManager.UpdateGameState(GameManager.GameState.PAUSE);
-        }
+        gameManager.UpdateGameState(GameManager.GameState.PAUSE);
     }
     public void Exit()
     {
