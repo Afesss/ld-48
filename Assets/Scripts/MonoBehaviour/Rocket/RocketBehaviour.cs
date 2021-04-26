@@ -7,6 +7,8 @@ using System;
 public class RocketBehaviour : MonoBehaviour
 {
     #region Variables
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
     [SerializeField] private Animation platformAnim;
     [SerializeField] private Animation rocketAnim;
     [SerializeField] private Transform rocket;
@@ -25,7 +27,10 @@ public class RocketBehaviour : MonoBehaviour
     {
         explosion.Stop();
         dirtyRain.Stop();
+        audioSource.Stop();
+        audioSource.playOnAwake = false;
     }
+
     public void RocketCanFly()
     {
         StartCoroutine(RocetStart());
@@ -41,6 +46,8 @@ public class RocketBehaviour : MonoBehaviour
     public void RocketLauncher()
     {
         startYPosition = rocket.position.y;
+        audioSource.clip = audioClip;
+        audioSource.Play();
         StartCoroutine(WaitSecondToStartRocket());
     }
 

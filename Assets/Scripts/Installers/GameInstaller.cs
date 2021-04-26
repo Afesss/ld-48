@@ -21,6 +21,7 @@ public class GameInstaller : MonoInstaller
         SignalBusInstaller.Install(Container);
         Container.DeclareSignal<SelectBuildObjectSignal>();
         Container.DeclareSignal<DeselectBuildObjectSignal>();
+        Container.DeclareSignal<AudioSignal>();
         Container.DeclareSignal<NotEnoughGarbageSpaceSignal>();
     }
 }

@@ -5,42 +5,70 @@ using Zenject;
 
 public class AudioController : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource backgroundAudioSource;
+    [SerializeField] private AudioSource mouseAudioSource;
+    [SerializeField] private AudioSource truckAudioSource;
+    [SerializeField] private AudioSource constructAudioSource;
 
     private AudioClip currentGameAudioClip;
     private AudioSettings audioSettings;
     private GameManager gameManager;
+    private SignalBus signalBus;
 
     [Inject]
-    private void Construct(AudioSettings audioSettings,GameManager gameManager)
+    private void Construct(AudioSettings audioSettings,GameManager gameManager,SignalBus signalBus)
     {
         this.audioSettings = audioSettings;
         this.gameManager = gameManager;
+        this.signalBus = signalBus;
     }
     private void Awake()
     {
         DontDestroyOnLoad(this);
         gameManager.OnChangeAudio += ChangeBackgroundAudio;
-        audioSource.playOnAwake = false;
-        audioSource.clip = audioSettings.mainMenu;
-        audioSource.Play();
+        mouseAudioSource.playOnAwake = false;
+        mouseAudioSource.loop = false;
+        mouseAudioSource.clip = audioSettings.click;
+
+        truckAudioSource.playOnAwake = false;
+        truckAudioSource.loop = true;
+        truckAudioSource.clip = audioSettings.truckWheels;
+
+        constructAudioSource.playOnAwake = false;
+        constructAudioSource.loop = false;
+        constructAudioSource.clip = audioSettings.construction;
+
+        backgroundAudioSource.playOnAwake = false;
+        backgroundAudioSource.loop = true;
+        backgroundAudioSource.clip = audioSettings.mainMenu;
+        backgroundAudioSource.Play();
+
         currentGameAudioClip = audioSettings.easyGame;
+
+        signalBus.Subscribe<AudioSignal>(PlayConstructAudio);
+    }
+    private void PlayConstructAudio()
+    {
+        constructAudioSource.Play();
     }
     private void ChangeBackgroundAudio(GameManager.GameState gameState)
     {
         switch (gameState)
         {
             case GameManager.GameState.RUNNING:
-                audioSource.clip = currentGameAudioClip;
+                backgroundAudioSource.clip = currentGameAudioClip;
+                truckAudioSource.Play();
                 break;
             case GameManager.GameState.PAUSE:
-                audioSource.clip = audioSettings.mainMenu;
+                backgroundAudioSource.clip = audioSettings.mainMenu;
+                truckAudioSource.Stop();
                 break;
             case GameManager.GameState.GAME_OVER:
-                audioSource.clip = audioSettings.gameOver;
+                backgroundAudioSource.clip = audioSettings.gameOver;
+                truckAudioSource.Stop();
                 break;
         }
-        audioSource.Play();
+        backgroundAudioSource.Play();
     }
     private void ChangeGameAudioClip(EcologyPollutionState ecologyPollutionState)
     {
@@ -56,8 +84,12 @@ public class AudioController : MonoBehaviour
                 currentGameAudioClip = audioSettings.hardGame;
                 break;
         }
-        audioSource.clip = currentGameAudioClip;
-        audioSource.Play();
+        backgroundAudioSource.clip = currentGameAudioClip;
+        backgroundAudioSource.Play();
+    }
+    private void OnMouseDown()
+    {
+        mouseAudioSource.Play();
     }
     private void OnDisable()
     {
