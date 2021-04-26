@@ -5406,7 +5406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2116447567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5485,6 +5485,14 @@ PrefabInstance:
     - target: {fileID: 93589356141932309, guid: eb03ad06c6cb01c44935385f067c3e48, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93589356259356832, guid: eb03ad06c6cb01c44935385f067c3e48, type: 3}
+      propertyPath: m_text
+      value: Not enough money
+      objectReference: {fileID: 0}
+    - target: {fileID: 93589356313300775, guid: eb03ad06c6cb01c44935385f067c3e48, type: 3}
+      propertyPath: m_text
+      value: Not enough space
       objectReference: {fileID: 0}
     - target: {fileID: 93589357005618434, guid: eb03ad06c6cb01c44935385f067c3e48, type: 3}
       propertyPath: m_AnchorMax.x
