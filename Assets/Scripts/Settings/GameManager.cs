@@ -7,8 +7,10 @@ using Zenject;
 
 public class GameManager : IInitializable
 {
-    internal event Action OnGameOver;
+    internal event Action OnMainMenu;
     internal event Action<GameState> OnChangeAudio;
+    internal event Action OnGameOver;
+    internal event Action OnResumeGame;
     #region Enum
     private enum GameScene
     {
@@ -91,7 +93,7 @@ public class GameManager : IInitializable
     }
     internal void OnGameOverInvoke()
     {
-        OnGameOver?.Invoke();
+        OnMainMenu?.Invoke();
     }
     internal void UpdateGameState(GameState gameState)
     {
@@ -101,12 +103,14 @@ public class GameManager : IInitializable
             case GameState.PREGAME:
                 break;
             case GameState.RUNNING:
+                OnResumeGame?.Invoke();
                 Time.timeScale = 1;
                 break;
             case GameState.PAUSE:
                 Time.timeScale = 0;
                 break;
             case GameState.GAME_OVER:
+                OnGameOver?.Invoke();
                 break;
         }
         currentGameState = gameState;

@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class UIWorldCanvasCameraAlign : MonoBehaviour
 {
-    private void Update()
+    [SerializeField]
+    private Camera cam;
+
+    private void Start()
     {
-        transform.rotation = Camera.main.transform.rotation;
+        if (cam != null)
+            transform.rotation = cam.transform.rotation;
     }
 
 }
