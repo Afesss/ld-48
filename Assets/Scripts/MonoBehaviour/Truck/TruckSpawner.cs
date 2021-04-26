@@ -14,20 +14,35 @@ public class TruckSpawner : MonoBehaviour
     private float timeToSpawnCar;
     private TruckPool truckPool;
     private Settings settings;
+    private GameManager gameManager;
+    private bool isActive = true;
     #endregion
 
     #region Construct
     [Inject]
-    public void Construct(Settings settings,TruckPool truckPool)
+    public void Construct(Settings settings,TruckPool truckPool, GameManager gameManager)
     {
         this.settings = settings;
         this.truckPool = truckPool;
+        this.gameManager = gameManager;
     }
     #endregion
 
     #region Methods
+    private void Awake()
+    {
+        if (gameManager != null)
+            gameManager.OnGameOver += OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        isActive = false;
+    }
+
     private void Start()
     {
+        isActive = true;
         timeToSpawnCar = settings.StartTimeToCarSpawn;
         truckPool.truckPollService = new PoolingService<TruckBehaviour>(truckPool.settings.turckPrefab, 
             truckPool.settings.poolTruckCount, pool, true);
@@ -35,27 +50,33 @@ public class TruckSpawner : MonoBehaviour
     }
     private IEnumerator CarsSpawner()
     {
-        
-        if(currentSpawnCarAmount > settings.countCarToChangeTimeSpawn)
-        {
-            if (timeToSpawnCar <= settings.minTimeToSpawnCar)
+        while (isActive)
+        { 
+            if(currentSpawnCarAmount > settings.countCarToChangeTimeSpawn)
             {
-                timeToSpawnCar = settings.minTimeToSpawnCar;
+                if (timeToSpawnCar <= settings.minTimeToSpawnCar)
+                {
+                    timeToSpawnCar = settings.minTimeToSpawnCar;
+                }
+                else
+                {
+                    timeToSpawnCar -= settings.decreaseStepTimeToCarSpawn;
+                }
+                currentSpawnCarAmount = 0;
             }
-            else
-            {
-                timeToSpawnCar -= settings.decreaseStepTimeToCarSpawn;
-            }
-            currentSpawnCarAmount = 0;
+
+            TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
+            car.SetPath(new TruckRoute(truckWayPoints.SpawnPoint, truckWayPoints.WayPoints));
+
+            currentSpawnCarAmount++;
+            yield return new WaitForSeconds(timeToSpawnCar);
         }
+    }
 
-        TruckBehaviour car = truckPool.truckPollService.GetFreeElement();
-        car.SetPath(new TruckRoute(truckWayPoints.SpawnPoint, truckWayPoints.WayPoints));
-
-        currentSpawnCarAmount++;
-        yield return new WaitForSeconds(timeToSpawnCar);
-
-        StartCoroutine(CarsSpawner());
+    private void OnDestroy()
+    {
+        if (gameManager != null)
+            gameManager.OnGameOver -= OnGameOver;
     }
     #endregion
 

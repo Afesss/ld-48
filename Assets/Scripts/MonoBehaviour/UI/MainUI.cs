@@ -29,7 +29,7 @@ public class MainUI : MonoBehaviour
     #region Methods
     protected void Awake()
     {
-        gameManager.OnGameOver += Pause;
+        gameManager.OnMainMenu += Pause;
     }
     private void Update()
     {
@@ -81,7 +81,7 @@ public class MainUI : MonoBehaviour
     }
     public void Exit()
     {
-        gameManager.OnGameOver -= Pause;
+        gameManager.OnMainMenu -= Pause;
         Application.Quit();
     }
     public void ShowTutorial()
