@@ -6,9 +6,14 @@ using System;
 public static class AudioEventBroker
 {
     public static event Action OnAudioEvent;
+    public static event Action OnResetAudio;
     public static void OnAudioEventInvoke()
     {
         OnAudioEvent?.Invoke();
+    }
+    public static void OnResetAudioInvoke()
+    {
+        OnResetAudio?.Invoke();
     }
 }
 public class AudioController : MonoBehaviour
@@ -20,18 +25,14 @@ public class AudioController : MonoBehaviour
 
     private float truckVolume = 0.1f;
 
-    private EcologyPollutionState currentEcologyState;
     private AudioClip currentGameAudioClip;
     private AudioSettings audioSettings;
     private GameManager gameManager;
-    private SignalBus signalBus;
-    private Ecology ecology;
     [Inject]
-    private void Construct(AudioSettings audioSettings,GameManager gameManager,Ecology ecology)
+    private void Construct(AudioSettings audioSettings,GameManager gameManager)
     {
         this.audioSettings = audioSettings;
         this.gameManager = gameManager;
-        this.ecology = ecology;
     }
     private void Awake()
     {
@@ -60,52 +61,26 @@ public class AudioController : MonoBehaviour
         
     }
     
-    private void Ecology_OnEcologyChange(Ecology.Type type)
-    {
-        if (gameManager.currentGameState == GameManager.GameState.GAME_OVER)
-        {
-            return;
-        }
-        float currentRate = ecology.GetCurrenMaxPollutionRate();
-        if(currentRate > 0.3f)
-        {
-            if(currentEcologyState == EcologyPollutionState.Medium)
-            {
-                return;
-            }
-            currentEcologyState = EcologyPollutionState.Medium;
-        }
-        else if(currentRate > 0.6f)
-        {
-            if (currentEcologyState == EcologyPollutionState.Hard)
-            {
-                return;
-            }
-            currentEcologyState = EcologyPollutionState.Hard;
-        }
-        else
-        {
-            if (currentEcologyState == EcologyPollutionState.Minimum)
-            {
-                return;
-            }
-            currentEcologyState = EcologyPollutionState.Minimum;
-        }
-        ChangeGameAudioClip(currentEcologyState);
-    }
-
     private void OnDestroy()
     {
-        ecology.OnEcologyChange -= Ecology_OnEcologyChange;
         AudioEventBroker.OnAudioEvent -= PlayConstructAudio;
+        AudioEventBroker.OnResetAudio -= OnResetAudio;
     }
     private void Start()
     {
         gameManager.OnChangeAudio += ChangeBackgroundAudio;
-        ecology.OnEcologyChange += Ecology_OnEcologyChange;
 
         AudioEventBroker.OnAudioEvent += PlayConstructAudio;
+        AudioEventBroker.OnResetAudio += OnResetAudio;
     }
+
+    private void OnResetAudio()
+    {
+        backgroundAudioSource.Stop();
+        backgroundAudioSource.clip = audioSettings.mainMenu;
+        backgroundAudioSource.Play();
+    }
+
     private void PlayConstructAudio()
     {
         constructAudioSource.Play();
@@ -127,23 +102,6 @@ public class AudioController : MonoBehaviour
                 truckAudioSource.Stop();
                 break;
         }
-        backgroundAudioSource.Play();
-    }
-    private void ChangeGameAudioClip(EcologyPollutionState ecologyPollutionState)
-    {
-        switch (ecologyPollutionState)
-        {
-            case EcologyPollutionState.Minimum:
-                currentGameAudioClip = audioSettings.easyGame;
-                break;
-            case EcologyPollutionState.Medium:
-                currentGameAudioClip = audioSettings.mediumGame;
-                break;
-            case EcologyPollutionState.Hard:
-                currentGameAudioClip = audioSettings.hardGame;
-                break;
-        }
-        backgroundAudioSource.clip = currentGameAudioClip;
         backgroundAudioSource.Play();
     }
     private void Update()
