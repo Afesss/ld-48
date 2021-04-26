@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1e2b7902ad702834ea7d9bc4bc49dcde
+guid: 4a9fafb39b292264391a3592fcc800f0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2091949651206618867
-    second: TutorEng_0
+      213: -8475608156411489834
+    second: tagline_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -106,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TutorEng_0
+      name: tagline_0
       rect:
         serializedVersion: 2
-        x: 129
-        y: 474
-        width: 1187
-        height: 1284
+        x: 62
+        y: 1664
+        width: 963
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,8 +120,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d01c3d730e6e7f2e0800000000000000
-      internalID: -2091949651206618867
+      spriteID: 6d190b59947906a80800000000000000
+      internalID: -8475608156411489834
       vertices: []
       indices: 
       edges: []
