@@ -2,7 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-
+using System;
+public static class AudioEventBroker
+{
+    public static event Action OnAudioEvent;
+    public static void OnAudioEventInvoke()
+    {
+        OnAudioEvent?.Invoke();
+    }
+}
 public class AudioController : MonoBehaviour
 {
     [SerializeField] private AudioSource backgroundAudioSource;
@@ -19,12 +27,10 @@ public class AudioController : MonoBehaviour
     private SignalBus signalBus;
     private Ecology ecology;
     [Inject]
-    private void Construct(AudioSettings audioSettings,GameManager gameManager, SignalBus signalBus,
-        Ecology ecology)
+    private void Construct(AudioSettings audioSettings,GameManager gameManager,Ecology ecology)
     {
         this.audioSettings = audioSettings;
         this.gameManager = gameManager;
-        this.signalBus = signalBus;
         this.ecology = ecology;
     }
     private void Awake()
@@ -51,12 +57,15 @@ public class AudioController : MonoBehaviour
 
         currentGameAudioClip = audioSettings.easyGame;
 
-        signalBus.Subscribe<AudioSignal>(PlayConstructAudio);
-        ecology.OnEcologyChange += Ecology_OnEcologyChange;
+        
     }
     
     private void Ecology_OnEcologyChange(Ecology.Type type)
     {
+        if (gameManager.currentGameState == GameManager.GameState.GAME_OVER)
+        {
+            return;
+        }
         float currentRate = ecology.GetCurrenMaxPollutionRate();
         if(currentRate > 0.3f)
         {
@@ -87,12 +96,15 @@ public class AudioController : MonoBehaviour
 
     private void OnDestroy()
     {
-        signalBus.Unsubscribe<AudioSignal>(PlayConstructAudio);
         ecology.OnEcologyChange -= Ecology_OnEcologyChange;
+        AudioEventBroker.OnAudioEvent -= PlayConstructAudio;
     }
     private void Start()
     {
         gameManager.OnChangeAudio += ChangeBackgroundAudio;
+        ecology.OnEcologyChange += Ecology_OnEcologyChange;
+
+        AudioEventBroker.OnAudioEvent += PlayConstructAudio;
     }
     private void PlayConstructAudio()
     {
