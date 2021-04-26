@@ -61,15 +61,15 @@ public class UIGameOver : MonoBehaviour
     }
     private void EnableGameOver(RocketSignal rocketSignal)
     {
-        StartCoroutine(WaitTwoSecond());
-    }
-    private IEnumerator WaitTwoSecond()
-    {
-        yield return new WaitForSeconds(2);
-        EnableGameOver(GameOverVersion.Rocket);
+        EnableGameOver(rocketSignal.gameOverVersion);
     }
     public void EnableGameOver(GameOverVersion version)
     {
+        if(gameManager.currentGameState == GameManager.GameState.GAME_OVER)
+        {
+            return;
+        }
+
         switch (version)
         {
             case GameOverVersion.Dump:
