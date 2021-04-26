@@ -60,8 +60,6 @@ public class Ecology
                     OnPollutionExceeded?.Invoke(UIGameOver.GameOverVersion.Water);
                     break;
             }
-            // TODO: ”брать после отладки
-            Debug.Log($"ƒостигнуто максимальное загр€знение по параметру {type}");
         }
     }
 

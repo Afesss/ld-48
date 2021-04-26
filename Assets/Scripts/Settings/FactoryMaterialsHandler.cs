@@ -7,15 +7,43 @@ public class FactoryMaterialsHandler : IInitializable
     private Color currentWallCollor;
     private Color currentRoofColor;
     private Settings settings;
-    
-    public FactoryMaterialsHandler(Settings settings)
+    private Ecology ecology;
+    private SignalBus signalBus;
+    public FactoryMaterialsHandler(Settings settings, Ecology ecology,SignalBus signalBus)
     {
         this.settings = settings;
+        this.ecology = ecology;
+        this.signalBus = signalBus;
     }
     public void Initialize()
     {
         ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
+        ecology.OnEcologyChange += Ecology_OnEcologyChange;
+        Debug.Log("1");
+        signalBus.Subscribe<MainMenuSignal>(ResetFactoryColor);
     }
+    private void ResetFactoryColor()
+    {
+
+        ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
+    }
+    public void UnsubscribeEcologyEvent()
+    {
+        ecology.OnEcologyChange -= Ecology_OnEcologyChange;
+    }
+    private void Ecology_OnEcologyChange(Ecology.Type type)
+    {
+        float currentRate = ecology.GetCurrenMaxPollutionRate();
+        if (currentRate > 0.3f)
+        {
+            ChangeFactoryMaterialColor(EcologyPollutionState.Medium);
+        }
+        else if(currentRate > 0.6f)
+        {
+            ChangeFactoryMaterialColor(EcologyPollutionState.Hard);
+        }
+    }
+
     public void ChangeFactoryMaterialColor(EcologyPollutionState ecologyPollution)
     {
         switch (ecologyPollution)

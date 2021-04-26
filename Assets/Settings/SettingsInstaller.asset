@@ -14,29 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CityMaterials:
     factoryWall: {fileID: 2100000, guid: 46d555f6dda8149469744a058e895827, type: 2}
-    minFacotryWallColor: {r: 0.4901961, g: 0.43137258, b: 0.38823533, a: 0}
-    midFactoryWallColor: {r: 0, g: 0, b: 0, a: 0}
+    minFacotryWallColor: {r: 0.8235295, g: 0.7960785, b: 0.75294125, a: 0}
+    midFactoryWallColor: {r: 0.2509804, g: 0.30980393, b: 0.10980393, a: 0}
     hardFactoryWallColor: {r: 0, g: 0, b: 0, a: 0}
     factoryRoof: {fileID: 2100000, guid: 442910e3330f7804b8d69500a14f6078, type: 2}
-    minFactoryRoofColor: {r: 0.4666667, g: 0.4039216, b: 0.26666668, a: 0}
-    midFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
+    minFactoryRoofColor: {r: 0.5686275, g: 0.49411768, b: 0.42352945, a: 0}
+    midFactoryRoofColor: {r: 0.29411766, g: 0.21176472, b: 0.18431373, a: 0}
     hardFactoryRoofColor: {r: 0, g: 0, b: 0, a: 0}
   Audio:
     mainMenu: {fileID: 8300000, guid: ed7598cd00d1d3d42868750dcd06cdcc, type: 3}
     easyGame: {fileID: 8300000, guid: c61dd6de45ffbe44488f802cdbbe3c1e, type: 3}
     mediumGame: {fileID: 8300000, guid: ff099e148080afb428718e2e10782dcc, type: 3}
     hardGame: {fileID: 8300000, guid: 4ed5218d9c566f447984a839dc734d3d, type: 3}
-    gameOver: {fileID: 0}
-    truckWheels: {fileID: 0}
-    construction: {fileID: 0}
-    click: {fileID: 0}
+    gameOver: {fileID: 8300000, guid: 8724be5a9ef7458408b6648775458f8f, type: 3}
+    truckWheels: {fileID: 8300000, guid: b8b25039845a6a245865e42a2a785baa, type: 3}
+    construction: {fileID: 8300000, guid: 74053f8483f3ccb4eb654fdaa5d4f9af, type: 3}
+    click: {fileID: 8300000, guid: 04bf7acb99b875348be006e46d55c62b, type: 3}
   UIGameOver:
-    dumpGameOver: {fileID: 0}
-    airGameOver: {fileID: 0}
-    forestGameOver: {fileID: 0}
-    waterGameOver: {fileID: 0}
-    rocketGameOver: {fileID: 0}
-    dissatisfiedGameOver: {fileID: 0}
+    dumpGameOver: {fileID: 21300000, guid: 3636a6787eb48f1469f6d52d4c0cf8cf, type: 3}
+    airGameOver: {fileID: 21300000, guid: 4a31982ef812370408b40905c5277fa6, type: 3}
+    forestGameOver: {fileID: 21300000, guid: cef82709b2ec1a342967916173f2b99e, type: 3}
+    waterGameOver: {fileID: 21300000, guid: 9f783487f47ec754eb12c76e5a98edae, type: 3}
+    rocketGameOver: {fileID: 21300000, guid: 460b2cac47fa0a545a6fe9cc65afa4bc, type: 3}
+    dissatisfiedGameOver: {fileID: 21300000, guid: 1a7f0f0cddd0bbd48811a5947a144996, type: 3}
   TruckPool:
     turckPrefab: {fileID: 4916074292160397900, guid: 60807665b09c95a478f5ec772d6c5429, type: 3}
     poolTruckCount: 20
