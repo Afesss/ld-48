@@ -38,7 +38,7 @@ MonoBehaviour:
     rocketGameOver: {fileID: 0}
     dissatisfiedGameOver: {fileID: 0}
   TruckPool:
-    turckPrefab: {fileID: 5803330403083096111, guid: 5bb6122434c70d94fad95fcc8f72ab53, type: 3}
+    turckPrefab: {fileID: 4916074292160397900, guid: 60807665b09c95a478f5ec772d6c5429, type: 3}
     poolTruckCount: 20
   Money:
     startAmount: 0
