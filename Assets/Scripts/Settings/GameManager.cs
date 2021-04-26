@@ -31,11 +31,13 @@ public class GameManager : IInitializable
     internal GameState previousGameState { get; private set; }
     private List<AsyncOperation> loadOperations = new List<AsyncOperation>();
     public bool SceneUnloaded { get; set; }
+    public bool rockatGameOver { get; set; }
     #endregion
 
     #region Methods
     public void Initialize()
     {
+        rockatGameOver = false;
         currentGameState = GameState.PREGAME;
     }
     private void LoadScene(GameScene gameScene)

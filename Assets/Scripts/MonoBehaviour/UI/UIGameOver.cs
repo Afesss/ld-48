@@ -85,6 +85,7 @@ public class UIGameOver : MonoBehaviour
                 currentSprite = settings.waterGameOver;
                 break;
             case GameOverVersion.Rocket:
+                gameManager.rockatGameOver = true;
                 currentSprite = settings.rocketGameOver;
                 break;
             case GameOverVersion.Dissatisfied:
@@ -102,7 +103,6 @@ public class UIGameOver : MonoBehaviour
         factoryMaterials.ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
         gameOverMenu.SetActive(false);
         gameManager.OnGameOverInvoke();
-        
     }
     [Serializable]
     public struct Settings

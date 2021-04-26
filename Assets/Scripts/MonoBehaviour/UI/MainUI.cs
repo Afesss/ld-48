@@ -12,6 +12,7 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject menuCamera;
     [SerializeField] private GameObject mainEventSystem;
     [SerializeField] private GameObject tutorial;
+    [SerializeField] private GameObject epilouge;
     
     private GameManager gameManager;
     private SignalBus signalBus;
@@ -29,6 +30,8 @@ public class MainUI : MonoBehaviour
     #region Methods
     protected void Awake()
     {
+        epilouge.SetActive(false);
+        tutorial.SetActive(false);
         gameManager.OnMainMenu += Pause;
     }
     private void Update()
@@ -62,7 +65,7 @@ public class MainUI : MonoBehaviour
             }
         }
     }
-    public void Ñontinue()
+    public void Ã‘ontinue()
     {
         if (gameManager.currentGameState == GameManager.GameState.PAUSE && 
             gameManager.previousGameState != GameManager.GameState.GAME_OVER)
@@ -74,6 +77,11 @@ public class MainUI : MonoBehaviour
     }
     internal void Pause()
     {
+        if (gameManager.rockatGameOver)
+        {
+            tutorial.SetActive(false);
+            epilouge.SetActive(true);
+        }
         StopAllCoroutines();
         menuCamera.SetActive(true);
         mainMenu.SetActive(true);
