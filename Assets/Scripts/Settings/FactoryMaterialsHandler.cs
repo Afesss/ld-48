@@ -19,7 +19,6 @@ public class FactoryMaterialsHandler : IInitializable
     {
         ChangeFactoryMaterialColor(EcologyPollutionState.Minimum);
         ecology.OnEcologyChange += Ecology_OnEcologyChange;
-        Debug.Log("1");
         signalBus.Subscribe<MainMenuSignal>(ResetFactoryColor);
     }
     private void ResetFactoryColor()
