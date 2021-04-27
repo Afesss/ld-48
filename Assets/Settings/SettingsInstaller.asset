@@ -63,7 +63,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e882dac4ecd31f74892377dd26a081a9, type: 2}
     - {fileID: 11400000, guid: 464f15b7638e8b0499a26a2c286666fd, type: 2}
   Ecology:
-    MaxAirValue: 100
+    MaxAirValue: 1000
     MaxForestValue: 900
     MaxWaterValue: 800
   Factory:
